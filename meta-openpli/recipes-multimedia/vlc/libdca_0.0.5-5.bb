@@ -3,9 +3,9 @@ SECTION = "libs/multimedia"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRCREV = "4f6b5d6e6fb35994c342de95bf05e20117da549b"
-PR = "r1"
+PR = "r2"
 
-SRC_URI = "git://anonscm.debian.org/pkg-multimedia/${PN}.git;protocol=git"
+SRC_URI = "git://anonscm.debian.org/collab-maint/${PN}.git;protocol=git"
 
 S = "${WORKDIR}/git"
 

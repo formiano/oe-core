@@ -26,7 +26,6 @@ RDEPENDS_${PN} = " \
 	"
 
 RRECOMMENDS_${PN} = " \
-	enigma2-plugin-skins-pli-hd \
 	gst-plugin-subsink \
 	${GST_BASE_RDEPS} \
 	${GST_GOOD_RDEPS} \
@@ -110,6 +109,9 @@ GST_UGLY_RDEPS = " \
 RDEPENDS_${PN} += "libdreamdvd"
 RRECOMMENDS_${PN} += "libdvdcss"
 
+#make sure default skin is installed.
+RDEPENDS_${PN} += "${E2DEFAULTSKIN} "
+
 # We depend on the font which we use for TXT subtitles (defined in skin_subtitles.xml)
 RDEPENDS_${PN} += "font-valis-enigma"
 
@@ -140,17 +142,66 @@ DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy s
 # Note that these tools lack recipes
 RDEPENDS_enigma2-plugin-extensions-dvdburn = "dvd+rw-tools dvdauthor mjpegtools cdrkit python-imaging ${DEMUXTOOL}"
 RDEPENDS_enigma2-plugin-systemplugins-hotplug = "hotplug-e2-helper"
+RDEPENDS_enigma2-plugin-systemplugins-3gmodemmanager = "ppp usbmodeswitch usbmodeswitch-data wvdial wvstreams libwvutils4.6 libwvstreams-extras libuniconf4.6"
+RDEPENDS_enigma2-plugin-systemplugins-wirelessaccesspoint = "hostap-daemon bridge-utils"
+RDEPENDS_enigma2-plugin-extensions-streamtv = "librtmp0 gst-plugin-rtmp"
+RDEPENDS_enigma2-plugin-extensions-dlnabrowser = "djmount fuse-utils libfuse2 libupnp3 kernel-module-fuse"
+RDEPENDS_enigma2-plugin-extensions-dlnaserver = "minidlna libexif12 libavformat52 libavutil50 libavcodec52 libgsm1 libmp3lame0 libschroedinger-1.0-0 libtheora0 liboil"
+RDEPENDS_enigma2-plugin-extensions-webbrowser = "python-gdata libqtwebkite4 opera-hbbtv-browser qt4-embedded-fonts qt4-embedded-plugin-imageformat-gif qt4-embedded-plugin-imageformat-ico qt4-embedded-plugin-imageformat-jpeg qt4-embedded-plugin-imageformat-mng qt4-embedded-plugin-imageformat-svg qt4-embedded-plugin-imageformat-tiff qt4-embedded-plugin-iconengine-svgicon"
+RDEPENDS_enigma2-plugin-extensions-hbbtv = "tslib-conf libts-1.0-0 libsysfs2 directfb libgmp3 libmpfr1 opera-hbbtv-browser python-native tslib mpfr gmp libgmp10 libmpfr4"
+RDEPENDS_enigma2-plugin-systemplugins-devicemanager = "util-linux-ng-blkid ntfs-3g dosfstools"
+RDEPENDS_enigma2-plugin-systemplugins-transcodingsetup = "enigma2-transtreamproxy"
 
 inherit gitpkgv
 
 PV = "2.7+git${SRCPV}"
 PKGV = "2.7+git${GITPKGV}"
-PR = "r42"
+PR = "r1"
 
 ENIGMA2_BRANCH ?= "master"
 SRC_URI = "git://git.code.sf.net/p/openpli/enigma2;protocol=git;branch=${ENIGMA2_BRANCH}"
 
+SRC_URI_append_azboxhd = " \
+ file://azboxradiobootlogo.mvi \
+ file://azboxe2.patch \
+ file://rc.png \
+ file://rcold.png \
+ file://rcpositions.xml \
+ file://input_rcnew.png  \
+ file://input_rcnew-configured.png \
+ file://input_rcold.png  \
+ file://input_rcold-configured.png  \
+"
+
+SRC_URI_append_azboxme = " \
+ file://azboxradiobootlogo.mvi \
+ file://azboxe2.patch \
+ file://rc.png \
+ file://rcold.png \
+ file://rcpositions.xml \
+ file://input_rcnew.png  \
+ file://input_rcnew-configured.png \
+ file://input_rcold.png  \
+ file://input_rcold-configured.png  \
+"
+
+SRC_URI_append_azboxminime = " \
+ file://azboxradiobootlogo.mvi \
+ file://azboxe2.patch \
+ file://rc.png \
+ file://rcold.png \
+ file://rcpositions.xml \
+ file://input_rcnew.png  \
+ file://input_rcnew-configured.png \
+ file://input_rcold.png  \
+ file://input_rcold-configured.png  \
+"
+
 S = "${WORKDIR}/git"
+
+do_compile() {
+	python -O -m compileall ${S}
+}
 
 FILES_${PN} += "${datadir}/keymaps"
 FILES_${PN}-meta = "${datadir}/meta"
@@ -185,6 +236,10 @@ FILES_${PN}-dbg += "\
 # some plugins contain so's, their stripped symbols should not end up in the enigma2 package
 FILES_${PN}-dbg += "\
 	/usr/lib/enigma2/python/Plugins/*/*/.debug \
+	/usr/lib/enigma2/python/Plugins/*/*/*/.debug \
+	/usr/lib/enigma2/python/Plugins/*/*/*/*/.debug \
+	/usr/lib/enigma2/python/Plugins/*/*/*/*/*/.debug \
+	/usr/lib/enigma2/python/Plugins/*/*/*/*/*/*/.debug \
 	"
 
 # Save some space by not installing sources (mytest.py must remain)
@@ -203,6 +258,13 @@ FILES_${PN}-src = "\
 	/usr/lib/enigma2/python/*/*.py \
 	/usr/lib/enigma2/python/*/*/*.py \
 	/usr/lib/enigma2/python/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*/*/*/*/*/*.py \
+	/usr/lib/enigma2/python/*/*/*/*/*/*/*/*/*/*/*.py \
 	"
 
 RADIOMVI = "radio-hd.mvi"
@@ -210,6 +272,42 @@ RADIOMVI = "radio-hd.mvi"
 do_openpli_preinstall() {
 	ln -f ${S}/data/${RADIOMVI} ${S}/data/radio.mvi
 	install -d ${D}${sysconfdir}/enigma2
+}
+
+do_openpli_preinstall_azboxme() {
+ 	install -m 0644 ${WORKDIR}/azboxradiobootlogo.mvi ${S}/data/radio.mvi
+	install -d ${D}${sysconfdir}/enigma2	
+ 	install -m 0644 ${WORKDIR}/rc.png ${S}/data/skin_default/
+	install -m 0644 ${WORKDIR}/rcold.png ${S}/data/skin_default/
+ 	install -m 0644 ${WORKDIR}/rcpositions.xml ${S}/data	
+	install -m 0644 ${WORKDIR}/input_rcnew.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcnew-configured.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcold.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcold-configured.png  ${S}/data/skin_default/icons
+}
+
+do_openpli_preinstall_azboxminime() {
+ 	install -m 0644 ${WORKDIR}/azboxradiobootlogo.mvi ${S}/data/radio.mvi
+	install -d ${D}${sysconfdir}/enigma2	
+ 	install -m 0644 ${WORKDIR}/rc.png ${S}/data/skin_default/
+	install -m 0644 ${WORKDIR}/rcold.png ${S}/data/skin_default/
+ 	install -m 0644 ${WORKDIR}/rcpositions.xml ${S}/data	
+	install -m 0644 ${WORKDIR}/input_rcnew.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcnew-configured.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcold.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcold-configured.png  ${S}/data/skin_default/icons
+}
+
+do_openpli_preinstall_azboxhd() {
+ 	install -m 0644 ${WORKDIR}/azboxradiobootlogo.mvi ${S}/data/radio.mvi
+	install -d ${D}${sysconfdir}/enigma2	
+ 	install -m 0644 ${WORKDIR}/rc.png ${S}/data/skin_default/
+	install -m 0644 ${WORKDIR}/rcold.png ${S}/data/skin_default/
+ 	install -m 0644 ${WORKDIR}/rcpositions.xml ${S}/data	
+	install -m 0644 ${WORKDIR}/input_rcnew.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcnew-configured.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcold.png  ${S}/data/skin_default/icons
+	install -m 0644 ${WORKDIR}/input_rcold-configured.png  ${S}/data/skin_default/icons
 }
 
 addtask openpli_preinstall after do_compile before do_install
@@ -226,15 +324,33 @@ do_openpli_branding() {
 
 addtask openpli_branding after do_unpack before do_configure
 
+do_install_append_azboxme() {
+	install -d ${D}/usr/share/enigma2/rc_models/azme
+	install -m 0644 ${WORKDIR}/rc.png ${D}/usr/share/enigma2/rc_models/azme
+	install -m 0644 ${WORKDIR}/rcpositions.xml ${D}/usr/share/enigma2/rc_models/azme
+
+}
+
+do_install_append_azboxminime() {
+	install -d ${D}/usr/share/enigma2/rc_models/azme
+	install -m 0644 ${WORKDIR}/rc.png ${D}/usr/share/enigma2/rc_models/azme
+	install -m 0644 ${WORKDIR}/rcpositions.xml ${D}/usr/share/enigma2/rc_models/azme
+}
+
+do_install_append_azboxhd() {
+	install -d ${D}/usr/share/enigma2/rc_models/azhd
+	install -m 0644 ${WORKDIR}/rc.png ${D}/usr/share/enigma2/rc_models/azhd
+	install -m 0644 ${WORKDIR}/rcpositions.xml ${D}/usr/share/enigma2/rc_models/azhd
+}
+
 do_install_append() {
 	install -d ${D}/usr/share/keymaps
 	find ${D}/usr/lib/enigma2/python/ -name '*.pyc' -exec rm {} \;
 }
 
-python populate_packages_prepend() {
+python populate_packages_prepend () {
 	enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True)
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True)
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True)
-	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True)
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.py$', 'enigma2-plugin-%s-src', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
 }

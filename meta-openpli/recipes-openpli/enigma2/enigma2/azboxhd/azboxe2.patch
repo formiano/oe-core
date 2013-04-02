@@ -1,0 +1,389 @@
+diff -Naur a/data/keymap.xml b/data/keymap.xml
+--- a/data/keymap.xml	2012-11-29 14:34:42.000000000 +0100
++++ b/data/keymap.xml	2012-11-30 19:47:46.000000000 +0100
+@@ -208,6 +208,7 @@
+ 
+ 	<map context="InfobarSubserviceSelectionActions">
+ 		<key id="KEY_GREEN" mapto="subserviceSelection" flags="b" />
++		<key id="KEY_YELLOW" mapto="failsafe" flags="b" />
+ 	</map>
+ 
+ 	<map context="InfobarRedButtonActions">
+diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
+--- a/lib/dvb/dvb.cpp	2013-01-06 20:14:04.000000000 +0100
++++ b/lib/dvb/dvb.cpp	2013-01-08 21:32:33.000000000 +0100
+@@ -974,6 +974,8 @@
+ 		iDVBAdapter *adapter = fe ? fe->m_adapter : m_adapter.begin(); /* look for a demux on the same adapter as the frontend, or the first adapter for dvr playback */
+ 		int source = fe ? fe->m_frontend->getDVBID() : -1;
+ 		cap |= capHoldDecodeReference; // this is checked in eDVBChannel::getDemux
++		int n = 0;
++
+ 		if (!fe)
+ 		{
+ 			/*
+@@ -991,8 +993,16 @@
+ 			{
+ 				if (!i->m_inuse)
+ 				{
+-					/* mark the first unused demux, we'll use that when we do not find a better match */
+-					if (!unused) unused = i;
++					if(fe)
++					{
++						if (source >= 0 && n == source)
++							if (!unused) unused = i;
++					}
++					else
++					{
++						/* mark the first unused demux, we'll use that when we do not find a better match */
++						if (!unused) unused = i;
++					}
+ 				}
+ 				else
+ 				{
+@@ -1007,6 +1017,7 @@
+ 			if (fe)
+ 			{
+ 				++i;
++				++n;
+ 			}
+ 			else
+ 			{
+diff -Naur a/lib/dvb/dvbtime.cpp b/lib/dvb/dvbtime.cpp
+--- a/lib/dvb/dvbtime.cpp	2012-10-04 16:43:17.000000000 +0200
++++ b/lib/dvb/dvbtime.cpp	2012-10-04 18:09:42.000000000 +0200
+@@ -268,6 +268,20 @@
+ {
+ 	int time_difference;
+ 	bool restart_tdt = false;
++
++	/* Azbox Sigma mode check, leave update time checking while we are in exclusive player mode */
++	int val=0;
++	FILE *f = fopen("/proc/player_status", "r");
++	if (f)
++	{		
++		fscanf(f, "%d", &val);
++		fclose(f);	
++	}
++	if(val)
++		return;
++	/* */
++
++
+ 	if (!tp_time)
+ 		restart_tdt = true;
+ 	else if (tp_time == -1)
+diff -Naur a/lib/python/Components/Harddisk.py b/lib/python/Components/Harddisk.py
+--- a/lib/python/Components/Harddisk.py	2012-10-04 16:43:17.000000000 +0200
++++ b/lib/python/Components/Harddisk.py	2012-10-04 17:18:03.000000000 +0200
+@@ -6,6 +6,7 @@
+ from SystemInfo import SystemInfo
+ from Components.Console import Console
+ import Task
++from Tools.HardwareInfo import HardwareInfo
+ 
+ def readFile(filename):
+ 	file = open(filename)
+@@ -122,7 +123,11 @@
+ 		elif self.type == DEVTYPE_DEVFS:
+ 			ide_cf = self.device[:2] == "hd" and "host0" not in self.dev_path
+ 
+-		internal = "pci" in self.phys_path
++		hw_type = HardwareInfo().get_device_name()
++		if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' :
++			internal = "ide" in self.phys_path
++		else:
++			internal = "pci" in self.phys_path
+ 
+ 		if ide_cf:
+ 			ret = "External (CF)"
+@@ -673,6 +678,9 @@
+ 				physdev = dev
+ 				print "couldn't determine blockdev physdev for device", device
+ 		error, blacklisted, removable, is_cdrom, partitions, medium_found = self.getBlockDevInfo(device)
++		hw_type = HardwareInfo().get_device_name()
++		if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' :
++			if device[0:3] == "hda": blacklisted = True
+ 		if not blacklisted and medium_found:
+ 			description = self.getUserfriendlyDeviceName(device, physdev)
+ 			p = Partition(mountpoint = self.getMountpoint(device), description = description, force_mounted = True, device = device)
+diff -Naur a/lib/python/Components/RcModel.py b/lib/python/Components/RcModel.py
+--- a/lib/python/Components/RcModel.py	2012-11-29 14:34:43.000000000 +0100
++++ b/lib/python/Components/RcModel.py	2012-11-29 13:00:38.000000000 +0100
+@@ -8,7 +8,9 @@
+ 	RCTYPE_VU = 4
+ 	RCTYPE_ET4X00 = 5
+ 	RCTYPE_XP1000 = 6
+-
++	RCTYPE_AZHD = 50
++	RCTYPE_AZMe = 51
++	
+ 	def __init__(self):
+ 		self.currentRcType = self.RCTYPE_DMM
+ 		self.readRcTypeFromProc()
+@@ -48,6 +50,14 @@
+ 
+ 		elif os.path.exists('/proc/stb/info/vumodel'):
+ 			self.currentRcType = self.RCTYPE_VU
++		elif os.path.exists('/proc/stb/info/azmodel'):
++			f = open("/proc/stb/info/model",'r')
++			model = f.readline().strip()
++			f.close()
++			if model == "elite" or model == "premium" or model == "premium+" or model == "ultra":
++				self.currentRcType = self.RCTYPE_AZHD
++			elif model == "me" or model == "minime":
++				self.currentRcType = self.RCTYPE_AZMe
+ 
+ 	def getRcLocation(self):
+ 		if self.currentRcType == self.RCTYPE_ET9X00:
+@@ -59,8 +69,12 @@
+ 		elif self.currentRcType == self.RCTYPE_ET4X00:
+ 			return '/usr/share/enigma2/rc_models/et4x00/'
+ 		elif self.currentRcType == self.RCTYPE_XP1000:
+-			return '/usr/share/enigma2/rc_models/xp1000/'
++			return '/usr/share/enigma2/rc_models/xp1000/'			
+ 		elif self.currentRcType == self.RCTYPE_VU:
+ 			return '/usr/share/enigma2/rc_models/vu/'
++		elif self.currentRcType == self.RCTYPE_AZHD:
++			return '/usr/share/enigma2/rc_models/azhd/'
++		elif self.currentRcType == self.RCTYPE_AZMe:
++			return '/usr/share/enigma2/rc_models/azme/'
+ 
+ rc_model = RcModel()
+diff -Naur a/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py b/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py
+--- a/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py	2012-11-28 12:52:13.000000000 +0100
++++ b/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py	2012-11-24 19:57:00.000000000 +0100
+@@ -10,6 +10,7 @@
+ # available and preferred modes, as well as handling the currently
+ # selected mode. No other strict checking is done.
+ class VideoHardware:
++	hw_type = HardwareInfo().get_device_name()
+ 	rates = { } # high-level, use selectable modes.
+ 
+ 	modes = { }  # a list of (high-level) modes for a certain port.
+@@ -42,6 +43,15 @@
+ 								"60Hz":		{ 60: "1080p" },
+ 								"multi":	{ 50: "1080p50", 60: "1080p" } }
+ 
++	if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' or hw_type == "me" or hw_type == "minime" :
++		rates["1080p"] =		{ "50Hz":	{ 50: "1080p50" },
++									"60Hz":		{ 60: "1080p" },
++									"23Hz":		{ 23: "1080p" },
++									"24Hz":		{ 24: "1080p" },
++									"25Hz":		{ 25: "1080p" },
++									"30Hz":		{ 30: "1080p" },
++									"multi":	{ 50: "1080p50", 60: "1080p" } }
++
+ 	rates["PC"] = {
+ 		"1024x768": { 60: "1024x768" }, # not possible on DM7025
+ 		"800x600" : { 60: "800x600" },  # also not possible
+@@ -62,6 +72,7 @@
+ 	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
+ 	modes["DVI"] = ["720p", "1080p", "1080i", "576p", "480p", "576i", "480i"]
+ 	modes["DVI-PC"] = ["PC"]
++	if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' or hw_type == "me" or hw_type == "minime" : config.av.edid_override = True
+ 
+ 	def getOutputAspect(self):
+ 		ret = (16,9)
+@@ -99,9 +110,12 @@
+ 
+ 		self.readAvailableModes()
+ 
++		if self.hw_type == 'ultra' or self.hw_type == "me" or self.hw_type == "minime" : del self.modes["Scart"]
++
+ 		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
+ 			print "remove DVI-PC because of not existing modes"
+ 			del self.modes["DVI-PC"]
++		if self.hw_type == 'elite' or self.hw_type == 'premium' or self.hw_type == 'premium+' or self.hw_type == 'ultra' or self.hw_type == "me" or self.hw_type == "minime" : self.readPreferredModes()
+ 
+ 		self.createConfig()
+ 		self.readPreferredModes()
+@@ -156,6 +170,13 @@
+ 	def isModeAvailable(self, port, mode, rate):
+ 		rate = self.rates[mode][rate]
+ 		for mode in rate.values():
++##### Only for test #####
++			if port == "DVI":
++				if self.hw_type == 'elite' or self.hw_type == 'premium' or self.hw_type == 'premium+' or self.hw_type == 'ultra' or self.hw_type == "me" or self.hw_type == "minime" :
++					if mode not in self.modes_preferred and not config.av.edid_override.value:
++						print "no, not preferred"
++						return False
++##### Only for test #####
+ 			if mode not in self.modes_available:
+ 				return False
+ 		return True
+@@ -174,6 +195,14 @@
+ 		mode_60 = modes.get(60)
+ 		if mode_50 is None or force == 60:
+ 			mode_50 = mode_60
++		if mode_50 is None:
++			mode_50 = modes.get(30)
++		if mode_50 is None:
++			mode_50 = modes.get(23)
++		if mode_50 is None:
++			mode_50 = modes.get(24)
++		if mode_50 is None:
++			mode_50 = modes.get(25)
+ 		if mode_60 is None or force == 50:
+ 			mode_60 = mode_50
+ 
+diff -Naur a/lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml b/lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
+--- a/lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml	2012-10-04 16:43:17.000000000 +0200
++++ b/lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml	2012-10-04 17:20:52.000000000 +0200
+@@ -1,5 +1,5 @@
+ <wizard>
+-	<step id="inputselection" nextstep="modeselection" timeout="20" timeoutaction="selectnext">
++	<step id="inputselection" nextstep="modeselection" timeout="30" timeoutaction="selectnext">
+ 		<text value="Video input selection\n\nPlease press OK if you can see this page on your TV (or select a different input port).\n\nThe next input port will be automatically probed in 20 seconds." />
+ 		<displaytext value="Select video input with up/down buttons" />
+ 		<list type="dynamic" source="listInputChannels" evaluation="inputSelectionMade" onselect="inputSelectionMoved" />
+@@ -9,7 +9,7 @@
+ self.selectKey("OK")
+ 		</code>
+ 	</step>
+-	<step id="modeselection" nextstep="rateselection" timeout="20" timeoutaction="selectnext">
++	<step id="modeselection" nextstep="rateselection" timeout="30" timeoutaction="selectnext">
+ 		<text value="Video mode selection." />
+ 		<displaytext value="Select video mode" />
+ 		<list type="dynamic" source="listModes" evaluation="modeSelectionMade" onselect="modeSelectionMoved" />
+@@ -20,7 +20,7 @@
+ self["portpic"].hide()
+ 		</code>
+ 	</step>
+-	<step id="rateselection" timeout="20" timeoutaction="selectnext">
++	<step id="rateselection" timeout="30" timeoutaction="selectnext">
+ 		<condition>
+ self.condition = (self.port != "DVI" or self.mode == "PC")
+ 		</condition>		
+diff -Naur a/lib/python/Screens/InfoBarGenerics.py b/lib/python/Screens/InfoBarGenerics.py
+--- a/lib/python/Screens/InfoBarGenerics.py	2012-11-29 14:34:43.000000000 +0100
++++ b/lib/python/Screens/InfoBarGenerics.py	2012-11-30 19:38:26.000000000 +0100
+@@ -1918,6 +1918,7 @@
+ 		self["SubserviceSelectionAction"] = HelpableActionMap(self, "InfobarSubserviceSelectionActions",
+ 			{
+ 				"subserviceSelection": (self.subserviceSelection, _("Subservice list...")),
++				"failsafe": (self.failsafe, _("failsafe...")),
+ 			})
+ 
+ 		self["SubserviceQuickzapAction"] = HelpableActionMap(self, "InfobarSubserviceQuickzapActions",
+@@ -1935,6 +1936,12 @@
+ 
+ 		self.bsel = None
+ 
++	def failsafe(self):
++		try:
++			open("/proc/failsafe", "w").write("0")
++		except Exception, e:
++			print e
++
+ 	def __removeNotifications(self):
+ 		self.session.nav.event.remove(self.checkSubservicesAvail)
+ 
+diff -Naur a/lib/python/Tools/HardwareInfo.py b/lib/python/Tools/HardwareInfo.py
+--- a/lib/python/Tools/HardwareInfo.py	2012-08-07 14:09:23.000000000 +0200
++++ b/lib/python/Tools/HardwareInfo.py	2012-07-22 17:53:00.000000000 +0200
+@@ -44,4 +44,4 @@
+ 		return HardwareInfo.device_version
+ 
+ 	def has_hdmi(self):
+-		return (HardwareInfo.device_name == 'dm7020hd' or HardwareInfo.device_name == 'dm800se' or HardwareInfo.device_name == 'dm500hd' or (HardwareInfo.device_name == 'dm8000' and HardwareInfo.device_version != None))
++		return (HardwareInfo.device_name == 'me' or HardwareInfo.device_name == 'minime' or HardwareInfo.device_name == 'elite' or HardwareInfo.device_name == 'premium' or HardwareInfo.device_name == 'premium+' or HardwareInfo.device_name == 'ultra' or HardwareInfo.device_name == 'dm800se' or HardwareInfo.device_name == 'dm500hd' or (HardwareInfo.device_name == 'dm8000' and HardwareInfo.device_version != None))
+diff -Naur a/main/bsod.cpp b/main/bsod.cpp
+--- a/main/bsod.cpp	2012-08-07 14:10:15.000000000 +0200
++++ b/main/bsod.cpp	2012-10-05 16:02:57.000000000 +0200
+@@ -1,3 +1,7 @@
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++
+ #include <csignal>
+ #include <fstream>
+ #include <sstream>
+@@ -18,7 +22,7 @@
+ 
+ /************************************************/
+ 
+-#define CRASH_EMAILADDR "forum at www.openpli.org"
++#define CRASH_EMAILADDR "forum at www.openazbox.info"
+ #define INFOFILE "/maintainer.info"
+ 
+ #define RINGBUFFER_SIZE 16384
+@@ -113,6 +117,39 @@
+ 
+ void bsodFatal(const char *component)
+ {
++
++	if (!component)
++	{
++		/* Azbox Sigma mode check, switch back from player mode to normal mode if player Python code crashed and enigma2 restart */		
++		int val=0;
++		FILE *f = fopen("/proc/player_status", "r");
++		if (f)
++		{		
++			fscanf(f, "%d", &val);
++			fclose(f);
++		}
++		if(val)
++		{
++			int rmfp_fd = open("/tmp/rmfp.kill", O_CREAT);
++			if(rmfp_fd > 0) 
++			{
++				int t = 50;
++				close(rmfp_fd);
++				while(access("/tmp/rmfp.kill", F_OK) >= 0 && t--) {
++				usleep(10000);
++				}
++			}		
++			f = fopen("/proc/player", "w");
++			if (f)
++			{		
++				fprintf(f, "%d", 1);
++				fclose(f);
++			}
++
++		}
++		/* */
++	}
++
+ 	/* show no more than one bsod while shutting down/crashing */
+ 	if (bsodhandled) return;
+ 	bsodhandled = true;
+diff -Naur a/main/enigma.cpp b/main/enigma.cpp
+--- a/main/enigma.cpp	2012-10-04 16:43:17.000000000 +0200
++++ b/main/enigma.cpp	2012-10-05 16:02:45.000000000 +0200
+@@ -125,6 +125,36 @@
+ 
+ int main(int argc, char **argv)
+ {
++
++	/* Azbox Sigma mode check, switch back from player mode to normal mode if player crashed and enigma2 restart */		
++	int val=0;
++	FILE *f = fopen("/proc/player_status", "r");
++	if (f)
++	{		
++		fscanf(f, "%d", &val);
++		fclose(f);
++	}
++	if(val)
++	{
++		int rmfp_fd = open("/tmp/rmfp.kill", O_CREAT);
++		if(rmfp_fd > 0) 
++		{
++			int t = 50;
++			close(rmfp_fd);
++			while(access("/tmp/rmfp.kill", F_OK) >= 0 && t--) {
++			usleep(10000);
++			}
++		}	
++		f = fopen("/proc/player", "w");
++		if (f)
++		{		
++			fprintf(f, "%d", 1);
++			fclose(f);
++		}
++
++	}
++	/* */
++	
+ #ifdef MEMLEAK_CHECK
+ 	atexit(DumpUnfreed);
+ #endif
