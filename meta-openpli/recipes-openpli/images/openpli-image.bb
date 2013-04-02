@@ -27,6 +27,12 @@ IMAGE_INSTALL = " \
 	util-linux-sfdisk \
 	volatile-media \
 	vsftpd \
+	dvbsnoop \
+	hddtemp \
+	ntp \
+	parted \
+	util-linux-blkid \
+	pe-version-info \
 	"
 
 OPTIONAL_PACKAGES ?= ""
@@ -36,10 +42,8 @@ OPTIONAL_PACKAGES += " \
 	ctorrent \
 	cups \
 	djmount \
-	dvbsnoop \
 	dvdfs \
 	gdb \
-	hddtemp \
 	hdparm \
 	inadyn-mt \
 	iperf \
@@ -50,11 +54,9 @@ OPTIONAL_PACKAGES += " \
 	mtd-utils \
 	nano \
 	ntfs-3g \
-	ntp \
 	openresolv \
 	openssh \
 	openvpn \
-	parted \
 	procps \
 	pyload \
 	rsync \
@@ -73,7 +75,7 @@ OPTIONAL_PACKAGES += " \
 	zeroconf \
 	"
 
-export IMAGE_BASENAME = "openpli"
+export IMAGE_BASENAME = "openazbox"
 IMAGE_LINGUAS = ""
 
 IMAGE_FEATURES += "package-management"
