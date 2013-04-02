@@ -1,0 +1,49 @@
+diff -u a/lib/python/Plugins/SystemPlugins/TransCodingSetup/plugin.py b/lib/python/Plugins/SystemPlugins/TransCodingSetup/plugin.py
+--- a/lib/python/Plugins/SystemPlugins/TransCodingSetup/plugin.py	2013-01-09 13:45:15.514051212 +0330
++++ b/lib/python/Plugins/SystemPlugins/TransCodingSetup/plugin.py	2013-01-09 13:50:08.418043994 +0330
+@@ -36,9 +36,6 @@
+ 			print "[TranscodingSetup] set failed!(%s, %s)"%(self.transcoding_value, self.port_value)
+ 
+ 	def setTranscoding(self, transcoding, port):
+-		if not self.getModel():
+-			print "This plugin is only supported for solo2/duo2."
+-			return -8
+ 		if transcoding not in ["enabled","disabled"] or port not in ["8001","8002"]:
+ 			print "Input error."
+ 			return -7
+@@ -116,18 +113,6 @@
+ 		if fileExists("/etc/init.d/inetd"):
+ 			os_system("/etc/init.d/inetd restart")
+ 
+-	def getModel(self):
+-		if fileExists("/proc/stb/info/vumodel"):
+-			vumodel = open("/proc/stb/info/vumodel")
+-			info=vumodel.read().strip()
+-			vumodel.close()
+-			if info in ["solo2", "duo2"]:
+-				return True
+-			else:
+-				return False
+-		else:
+-			return False
+-
+ class TranscodingSetup(Screen,ConfigListScreen, TranscodingSetupInit):
+ 	skin =  """
+ 		<screen position="center,center" size="560,270" title="Transcoding Setup" >
+@@ -158,16 +143,6 @@
+ 		self["key_green"] = StaticText(_("Ok"))
+ 		self["text"] = StaticText(_("%s")%TEXT)
+ 		self.createSetup()
+-		self.onLayoutFinish.append(self.checkModel)
+-		self.checkModelTimer = eTimer()
+-		self.checkModelTimer.callback.append(self.invalidmodel)
+-
+-	def checkModel(self):
+-		if not self.getModel():
+-			self.checkModelTimer.start(1000,True)
+-
+-	def invalidmodel(self):
+-			self.session.openWithCallback(self.close, MessageBox, _("This plugin is available on SOLO2/DUO2"), MessageBox.TYPE_ERROR)
+ 
+ 	def createSetup(self):
+ 		self.list = []

@@ -1,0 +1,9 @@
+diff -u a/lib/python/Plugins/Extensions/DLNABrowser/plugin.py b/lib/python/Plugins/Extensions/DLNABrowser/plugin.py
+--- a/lib/python/Plugins/Extensions/DLNABrowser/plugin.py	2012-11-07 14:38:52.000000000 +0330
++++ b/lib/python/Plugins/Extensions/DLNABrowser/plugin.py	2012-11-09 23:40:20.698876564 +0330
+@@ -905,4 +905,4 @@
+ 	session.open(DLNADeviceBrowser)
+                                                            
+ def Plugins(**kwargs):
+-	return PluginDescriptor(name=_("DLNA/uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
++	return PluginDescriptor(name=_("DLNA-uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

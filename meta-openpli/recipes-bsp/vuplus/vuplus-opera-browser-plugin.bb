@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c9e255efa454e0155c1fd758df7dcaf3"
 DEPENDS = "vuplus-opera-browser-util"
 RDEPENDS_${PN} = "vuplus-opera-browser-util"
 
-SRCREV = "6e2ef83a9d63faa57c7266d7331b0ca9b9f4c9f9"
+SRCREV = "2d3c6126e0c8e2949d9a918ba8f2005d2ee28150"
 inherit gitpkgv
  
 PV = "experimental-git${SRCPV}"
 PKGV = "experimental-git${GITPKGV}"
-PR = "r4"
+PR = "r110"
 BRANCH = "vuplus_experimental"
 
 SRC_URI = "git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH};tag=${SRCREV} \

@@ -1,0 +1,11 @@
+diff -u a/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py b/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py
+--- a/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py	2012-09-08 14:14:28.000000000 +0430
++++ b/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py	2012-09-21 16:33:16.977674043 +0330
+@@ -2,7 +2,6 @@
+ 
+ from Screens.Screen import Screen
+ from Screens.MessageBox import MessageBox
+-from Screens.DefaultWizard import DefaultWizard
+ from Screens.Standby import TryQuitMainloop
+ from Screens.VirtualKeyBoard import VirtualKeyBoard
+ 
