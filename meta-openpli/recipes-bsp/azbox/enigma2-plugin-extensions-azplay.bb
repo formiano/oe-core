@@ -10,7 +10,7 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r13"
+PR = "r14"
 
 SRC_URI = "git://github.com/OpenAZBox/AZPlay.git;protocol=git"
 
@@ -73,3 +73,4 @@ FILES_${PN} += "/usr/lib/"
 FILES_${PN} += "/etc/init.d/"
 FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/AZPlay/"
 FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/AZPlay/img/"
+

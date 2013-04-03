@@ -1,4 +1,4 @@
-DESCRIPTION = "PE version info"
+DESCRIPTION = "AZ version info"
 SECTION = "base"
 PRIORITY = "required"
 require conf/license/openpli-gplv2.inc

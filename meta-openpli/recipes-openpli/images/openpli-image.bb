@@ -32,7 +32,7 @@ IMAGE_INSTALL = " \
 	ntp \
 	parted \
 	util-linux-blkid \
-	pe-version-info \
+	az-version-info \
 	"
 
 OPTIONAL_PACKAGES ?= ""
