@@ -1,7 +1,7 @@
 DESCRIPTION = "Skins for Enigma2"
 MAINTAINER = "schwerkraft"
 PACKAGES = "${PN}-meta ${PN}"
-PACKAGES_DYNAMIC = "enigma2-skin-*"
+PACKAGES_DYNAMIC = "enigma2-plugin-skins-*"
 
 require conf/license/openpli-gplv2.inc
 
@@ -9,7 +9,7 @@ inherit gitpkgv
 
 PV = "experimental-git${SRCPV}"
 PKGV = "experimental-git${GITPKGV}"
-PR = "r1"
+PR = "r2"
 BRANCH = "master"
 
 SRC_URI = "git://schwerkraft.elitedvb.net/enigma2-skins/enigma2-skins.git;protocol=git;branch=${BRANCH}"
@@ -27,5 +27,5 @@ S = "${WORKDIR}/git"
 python populate_packages_prepend () {
 	if bb.data.expand('${REL_MINOR}', d) != "4":
 		enigma2_skindir = bb.data.expand('${datadir}/enigma2', d)
-		do_split_packages(d, enigma2_skindir, '(.*?)/.*', 'enigma2-skin-%s', 'Enigma2 Skin: %s', recursive=True, match_path=True, prepend=True)
+		do_split_packages(d, enigma2_skindir, '(.*?)/.*', 'enigma2-plugin-skins-%s', 'Enigma2 Skin: %s', recursive=True, match_path=True, prepend=True)
 }
