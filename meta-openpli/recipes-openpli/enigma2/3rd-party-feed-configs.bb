@@ -1,5 +1,5 @@
 DESCRIPTION = "Configuration files for 3rd-party feeds"
-PR = "r0"
+PR = "r1"
 
 require conf/license/openpli-gplv2.inc
 
@@ -10,6 +10,7 @@ do_compile() {
     for feed in ${FEEDS}; do
         echo "src/gz ${DISTRO_FEED_PREFIX}-${feed} ${DISTRO_FEED_URI}/${feed}" > ${S}/${sysconfdir}/opkg/${feed}-feed.conf
     done
+    echo "src/gz cam4me http://opencam.cam4me.org" > ${S}/${sysconfdir}/opkg/cam4me-feed.conf
 }
 do_install () {
         install -d ${D}${sysconfdir}/opkg
