@@ -10,7 +10,7 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "git://github.com/OpenAZBox/AzIPTV.git;protocol=git"
 
@@ -47,8 +47,8 @@ do_install() {
         install -m 0755 ${S}/Lists/* ${D}/usr/lib/enigma2/python/Plugins/Extensions/AzIPTV/Lists/
 }
 
-FILES_enigma2-plugin-systemplugins-aziptv = "/usr/lib/enigma2/python/Plugins/Extensions/AzIPTV"
+FILES_enigma2-plugin-extensions-aziptv = "/usr/lib/enigma2/python/Plugins/Extensions/AzIPTV"
 
-PACKAGES = "enigma2-plugin-systemplugins-aziptv"
+PACKAGES = "enigma2-plugin-extensions-aziptv"
 
 PROVIDES="${PACKAGES}"
