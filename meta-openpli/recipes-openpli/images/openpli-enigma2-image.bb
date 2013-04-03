@@ -23,7 +23,7 @@ WIFI_DRIVERS = " \
 
 ENIGMA2_PLUGINS = " \
 	enigma2-plugin-extensions-azplay \
-	enigma2-plugin-systemplugins-aziptv \
+	enigma2-plugin-extensions-aziptv \
 	enigma2-plugin-systemplugins-rtisys \	
 	enigma2-plugin-systemplugins-videosettingssetup \
 	enigma2-plugin-pli-softcamsetup \
