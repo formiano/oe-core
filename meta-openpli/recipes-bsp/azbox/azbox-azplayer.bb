@@ -10,7 +10,7 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r12"
+PR = "r13"
 
 SRC_URI = "git://github.com/OpenAZBox/AZPlay.git;protocol=git"
 
@@ -48,7 +48,7 @@ do_install_azboxhd() {
         install -m 0644 ${S}/img/*.png ${D}/usr/lib/enigma2/python/Plugins/Extensions/AZPlay/img/
 }
 
-do_install_azboxme() {
+do_install() {
 	install -d ${D}/usr/bin/
 	install -m 0755 ${S}/bin/rmfp_player ${D}/usr/bin/
 
@@ -66,10 +66,6 @@ do_install_azboxme() {
 
         install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/AZPlay/img/
         install -m 0644 ${S}/img/*.png ${D}/usr/lib/enigma2/python/Plugins/Extensions/AZPlay/img/
-}
-
-do_install_azboxminime() {
-do_install_azboxme
 }
 
 FILES_${PN} = "/usr/bin/"
