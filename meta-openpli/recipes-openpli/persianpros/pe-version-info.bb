@@ -34,10 +34,6 @@ do_install() {
 			echo "comment=Open AZBox" >> ${D}/etc/image-version
 			echo "creator=Open AZBox - Persian Professionals" >> ${D}/etc/image-version
 			echo "url=${URL}" >> ${D}/etc/image-version
-			install -d ${D}${sysconfdir}/init.d
-			install -d ${D}${sysconfdir}/rcS.d
-			install -m 0755 ${WORKDIR}/bootfix	${D}${sysconfdir}/init.d
-			ln -sf ../init.d/bootfix ${D}${sysconfdir}/rcS.d/S06bootfix
 }
 
 FILES_${PN} += "/etc"
