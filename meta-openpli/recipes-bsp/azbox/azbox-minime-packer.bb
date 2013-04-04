@@ -1,6 +1,6 @@
 DESCRIPTION = "Create Azbox MiniME webinterface update image"
 SECTION = "console/utils"
-LICENSE = "GPL"
+require conf/license/license-gplv2.inc
 
 PV="1.3"
 SRC_URI = "file://pack_minime_image.c \
