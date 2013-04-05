@@ -1,10 +1,9 @@
 DESCRIPTION = "create Azboxhd patch.e2 images"
 SECTION = "console/utils"
-LICENSE = "CLOSED"
-
+require conf/license/license-gplv2.inc
 PROVIDES = "azbox-hd-buildimage"
 
-PV="1.3"
+PV="1.4"
 SRC_URI = "file://pack_e2.c \
 	   file://Makefile.am \
 	   file://configure.ac"
@@ -19,5 +18,5 @@ do_configure_prepend() {
 	install -m 0644 ${WORKDIR}/Makefile.am ${S}
 }
 
-BBCLASSEXTEND = "native nativesdk"
+BBCLASSEXTEND = "native"
 
