@@ -1,6 +1,6 @@
 DESCRIPTION = "genromfs generates romfs filesystem images"
 HOMEPAGE = "http://jf.koan19.org/dev/romfs/"
-require conf/license/license-gplv2.inc
+LICENSE = "GPLv2+"
 INC_PR = "0"
 
 EXTRA_OEMAKE = '\
@@ -18,5 +18,3 @@ do_compile () {
 do_install () {
     oe_runmake 'PREFIX=${D}' install
 }
-
-BBCLASSEXTEND += "native nativesdk"
