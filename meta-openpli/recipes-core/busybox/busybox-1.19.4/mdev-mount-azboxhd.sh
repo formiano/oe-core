@@ -16,6 +16,10 @@ case "$ACTION" in
 			exit 0
 		fi
 		DEVBASE=`expr substr $MDEV 1 3`
+		# blacklisted by AZBox HD
+		if [ $DEVBASE == "hda" ] ; then
+			exit 0
+		fi
 		# check for "please don't mount it" file
 		if [ -f "/dev/nomount.${DEVBASE}" ] ; then
 			# blocked
@@ -53,8 +57,13 @@ case "$ACTION" in
 		if ! mount /dev/$MDEV > /dev/null 2>&1 ; then
 			# no fstab entry, use automatic mountpoint
 			REMOVABLE=`cat /sys/block/$DEVBASE/removable`
-			readlink -fn /sys/block/$DEVBASE/device | grep -qs 'pci\|ahci'
+			readlink -fn /sys/block/$DEVBASE/device | grep -s 'pci\|ahci'
 			EXTERNAL=$?
+			if [ $EXTERNAL != 0 ]; then
+				# AZBox HD internal SATA need different identification
+				readlink -fn /sys/block/$DEVBASE/device | grep -s 'tango2_bmide'
+				EXTERNAL=$?
+			fi
 			if [ "${REMOVABLE}" -eq "0" -a $EXTERNAL -eq 0 ] ; then
 				# mount the first non-removable internal device on /media/hdd
 				DEVICETYPE="hdd"
