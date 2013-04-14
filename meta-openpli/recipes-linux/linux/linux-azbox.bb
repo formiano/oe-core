@@ -5,9 +5,9 @@ MACHINE_KERNEL_PR_append = ".12"
 
 KV = "3.3.1"
 
-DEPENDS = "genromfs-native"
-DEPENDS_azboxhd = "genromfs-native azbox-hd-buildimage"
-DEPENDS_azboxminime = "genromfs-native azbox-minime-packer"
+DEPENDS = "genromfs-native gcc"
+DEPENDS_azboxhd = "genromfs-native azbox-hd-buildimage gcc"
+DEPENDS_azboxminime = "genromfs-native azbox-minime-packer gcc"
 
 SRC_URI += "http://azbox-enigma2-project.googlecode.com/files/linux-azbox-${KV}-new-2.tar.bz2;name=azbox-kernel \
 	   file://${MACHINE}_defconfig \

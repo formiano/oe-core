@@ -4,7 +4,7 @@ PRIORITY = "optional"
 LICENSE = "GPL"
 
 PV = "1.3"
-PR = "r0"
+PR = "r1"
 
 PROVIDES += "virtual/showiframe"
 RPROVIDES_${PN} += "virtual/showiframe"

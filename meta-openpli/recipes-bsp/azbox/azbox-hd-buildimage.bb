@@ -18,5 +18,5 @@ do_configure_prepend() {
 	install -m 0644 ${WORKDIR}/Makefile.am ${S}
 }
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
