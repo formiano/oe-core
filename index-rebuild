@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+# Script By Persian Prince
+# http://e2pe.com
+
+PWD := $(shell pwd)
+OE_BASE = $(PWD)
+
+rebuild-index:
+	cd $(OE_BASE)/build-azboxme; . ./env.source; bitbake package-index
+	cd $(OE_BASE)/build-azboxminime; . ./env.source; bitbake package-index
+	cd $(OE_BASE)/build-azboxhd; . ./env.source; bitbake package-index
