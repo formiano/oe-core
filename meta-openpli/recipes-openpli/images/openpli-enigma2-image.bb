@@ -22,6 +22,7 @@ WIFI_DRIVERS = " \
 	"
 
 ENIGMA2_PLUGINS = " \
+	enigma2-plugin-extensions-keymap-pingflood \
 	enigma2-plugin-extensions-azplay \
 	enigma2-plugin-extensions-aziptv \
 	enigma2-plugin-systemplugins-rtisys \	
@@ -79,6 +80,7 @@ ENIGMA2_OPTIONAL = " \
 	dvb-usb-drivers-meta \
 	cdfs cdtextinfo \
 	meta-enigma2-dvdburn \
+	enigma2-plugin-systemplugins-ofw-launcher-pingflood \
 	"
 
 IMAGE_INSTALL += " \
