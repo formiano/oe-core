@@ -81,6 +81,7 @@ ENIGMA2_OPTIONAL = " \
 	cdfs cdtextinfo \
 	meta-enigma2-dvdburn \
 	enigma2-plugin-systemplugins-ofw-launcher-pingflood \
+	enigma2-plugin-skins-mymetrixhd \
 	"
 
 IMAGE_INSTALL += " \
