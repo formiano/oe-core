@@ -1,4 +1,4 @@
-PRINC = "28"
+PRINC = "29"
 
 SRC_URI += " \
 			file://0001-ifupdown-support-post-up-pre-down-hooks.patch \
@@ -20,8 +20,6 @@ SRC_URI += " \
 			file://inetd \
 			file://inetd.conf \
 			"
-
-SRC_URI_append_azboxhd = "file://mdev-mount-azboxhd.sh"
 
 # we do not really depend on mtd-utils, but as mtd-utils replaces 
 # include/mtd/* we cannot build in parallel with mtd-utils
@@ -48,14 +46,6 @@ do_install_append() {
 	fi
 	install -d ${D}${sysconfdir}/mdev
 	install -m 0755 ${WORKDIR}/mdev-mount.sh ${D}${sysconfdir}/mdev
-}
-
-do_install_append_azboxhd() {
-	if grep -q "CONFIG_CRONTAB=y" ${WORKDIR}/defconfig; then
-		install -d ${D}${sysconfdir}/cron/crontabs
-	fi
-	install -d ${D}${sysconfdir}/mdev
-	install -m 0755 ${WORKDIR}/mdev-mount-azboxhd.sh ${D}${sysconfdir}/mdev/mdev-mount.sh
 }
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
