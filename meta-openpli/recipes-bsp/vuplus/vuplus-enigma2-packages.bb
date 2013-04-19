@@ -1,20 +1,18 @@
 DESCRIPTION = "Vuplus Specific plugins"
-MAINTAINER = "Persian Professionals <persianpros@yahoo.com>"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c9e255efa454e0155c1fd758df7dcaf3"
-
+SRCREV_pn-${PN} ?= "${AUTOREV}"
 DEPENDS = "python-native"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "2d3c6126e0c8e2949d9a918ba8f2005d2ee28150"
 inherit gitpkgv
  
 PV = "experimental-git${SRCPV}"
 PKGV = "experimental-git${GITPKGV}"
-PR = "r1"
+PR = "r2"
 BRANCH = "vuplus_experimental"
 
-SRC_URI = "git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH};tag=${SRCREV}"
+SRC_URI = "git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH}"
 SRC_URI += "file://3g.patch \
 	file://dlna.patch \
 	file://transcoding.patch \
@@ -53,6 +51,8 @@ python populate_packages_prepend () {
 	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
 	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.py$', 'enigma2-plugin-%s-src', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
 	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', 'Enigma2 Plugin: %s', recursive=True, match_path=True, prepend=True)
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True)
+	do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True)
 }
 
 do_install() {
@@ -144,4 +144,3 @@ PACKAGES = "\
 	"
 
 PROVIDES="${PACKAGES}"
-
