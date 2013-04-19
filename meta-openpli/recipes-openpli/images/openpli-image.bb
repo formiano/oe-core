@@ -43,6 +43,7 @@ OPTIONAL_PACKAGES += " \
 	cups \
 	djmount \
 	dvdfs \
+	evtest \
 	gdb \
 	hdparm \
 	inadyn-mt \
