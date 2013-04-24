@@ -166,6 +166,8 @@ SRC_URI = "git://git.code.sf.net/p/openpli/enigma2;protocol=git;branch=${ENIGMA2
 SRC_URI_append_azboxhd = " \
  file://azboxradiobootlogo.mvi \
  file://azboxe2.patch \
+ file://lcdchar.patch \
+ file://vfdskin.patch \
  file://rc.png \
  file://rcold.png \
  file://rcpositions.xml \
@@ -178,6 +180,7 @@ SRC_URI_append_azboxhd = " \
 SRC_URI_append_azboxme = " \
  file://azboxradiobootlogo.mvi \
  file://azboxe2.patch \
+ file://vfdskin.patch \
  file://rc.png \
  file://rcold.png \
  file://rcpositions.xml \
