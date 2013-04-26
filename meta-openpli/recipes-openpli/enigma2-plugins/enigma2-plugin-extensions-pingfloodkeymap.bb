@@ -10,9 +10,9 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r3"
+PR = "r4"
 
-SRC_URI = "git://github.com/persianpros/keymap-plugin.git;protocol=git"
+SRC_URI = "git://github.com/persianpros/pingfloodkeymap-plugin.git;protocol=git"
 
 S = "${WORKDIR}/git"
 

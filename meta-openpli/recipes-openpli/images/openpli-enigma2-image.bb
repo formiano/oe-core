@@ -80,8 +80,6 @@ ENIGMA2_OPTIONAL = " \
 	cdfs cdtextinfo \
 	meta-enigma2-dvdburn \
 	enigma2-plugin-skins-mymetrixhd \
-	enigma2-plugin-systemplugins-pingfloodofwlauncher \
-	enigma2-plugin-extensions-pingfloodkeymap \
 	enigma2-plugin-extensions-rsiconfig \
 	enigma2-plugin-extensions-rsimediacenter \
 	"
