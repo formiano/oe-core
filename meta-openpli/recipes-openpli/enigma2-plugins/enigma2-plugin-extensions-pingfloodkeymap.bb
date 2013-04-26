@@ -1,4 +1,4 @@
-DESCRIPTION = "OFW Launcher by Ping Flood"
+DESCRIPTION = "KeyMap by Ping Flood"
 RDEPENDS = "enigma2"
 DEPENDS = "python-native"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -12,7 +12,7 @@ PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 PR = "r3"
 
-SRC_URI = "git://github.com/persianpros/ofwlauncher-plugin.git;protocol=git"
+SRC_URI = "git://github.com/persianpros/keymap-plugin.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
@@ -31,14 +31,23 @@ python populate_packages_prepend () {
 }
 
 do_install() {
-	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/OFW_Launcher
+	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood
 	
 	install -m 0644 ${S}/*.pyo \
-	${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/OFW_Launcher
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood
+
+	install -m 0644 ${S}/plugin.png \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood
+
+        install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood/img/
+        install -m 0644 ${S}/img/*.png ${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood/img/
+
+        install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood/xml/
+        install -m 0644 ${S}/xml/*.xml ${D}/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood/xml/
 }
 
-FILES_enigma2-plugin-systemplugins-ofw-launcher-pingflood = "/usr/lib/enigma2/python/Plugins/SystemPlugins/OFW_Launcher"
+FILES_enigma2-plugin-extensions-pingfloodkeymap = "/usr/lib/enigma2/python/Plugins/Extensions/Keymap_by_PingFlood"
 
-PACKAGES = "enigma2-plugin-systemplugins-ofw-launcher-pingflood"
+PACKAGES = "enigma2-plugin-extensions-pingfloodkeymap"
 
 PROVIDES="${PACKAGES}"
