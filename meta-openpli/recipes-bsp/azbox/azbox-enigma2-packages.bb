@@ -10,9 +10,9 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r11"
+PR = "r12"
 
-SRC_URI = "git://github.com/OpenAZBox/RtiSYS.git;protocol=git \
+SRC_URI = "git://github.com/OpenAZBox/RTi-SYS.git;protocol=git \
 	  file://VideoSettingsSetup \
 	 "
 

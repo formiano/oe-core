@@ -10,9 +10,9 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r4"
+PR = "r5"
 
-SRC_URI = "git://github.com/OpenAZBox/AzIPTV.git;protocol=git"
+SRC_URI = "git://github.com/OpenAZBox/AZIPTV.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
