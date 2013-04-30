@@ -10,7 +10,7 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r12"
+PR = "r13"
 
 SRC_URI = "git://github.com/OpenAZBox/RTi-SYS.git;protocol=git \
 	  file://VideoSettingsSetup \
@@ -36,9 +36,6 @@ do_install() {
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/RtiSYS
 	
 	install -m 0644 ${S}/git/*.pyo \
-	${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/RtiSYS
-
-	install -m 0755 ${S}/git/ntpdate \
 	${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/RtiSYS
 
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/VideoSettingsSetup
