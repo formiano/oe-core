@@ -23,6 +23,7 @@ RDEPENDS_${PN} = " \
 	ethtool \
 	glibc-gconv-iso8859-15 \
 	${PYTHON_RDEPS} \
+	libdreamdvd \
 	"
 
 RRECOMMENDS_${PN} = " \
@@ -33,6 +34,7 @@ RRECOMMENDS_${PN} = " \
 	${GST_BAD_RDEPS} \
 	${GST_UGLY_RDEPS} \
 	gst-plugin-libxt \
+	libdvdcss \
 	"
 
 PYTHON_RDEPS = " \
