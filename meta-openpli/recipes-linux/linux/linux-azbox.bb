@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/linux-${KV}/COPYING;md5=d7810fab7487fb0aad
 MACHINE_KERNEL_PR_append = ".13"
 
 KV = "3.3.1"
-SRCDATE = "09052013"
+SRCDATE = "14052013"
 
 DEPENDS = "genromfs-native gcc"
 DEPENDS_azboxhd = "genromfs-native azbox-hd-buildimage gcc"
@@ -30,12 +30,12 @@ SRC_URI_append_azboxminime = "http://azbox-enigma2-project.googlecode.com/files/
 
 SRC_URI[azbox-kernel.md5sum] = "dfd04abeaf3741b3d2a44428ca5aeaa1"
 SRC_URI[azbox-kernel.sha256sum] = "31b73397220d85aedf3c914026371fc1eeac67e3de09a5610b70b209d2a8b9df"
-SRC_URI[azbox-initrd-azboxhd.md5sum] = "072f993b5139a15bc63d2d99152c6da7"
-SRC_URI[azbox-initrd-azboxhd.sha256sum] = "33064f25ddbf8e037225fe7cd07b234ceea5941f88a61aca999e4a6b8dbacc56"
-SRC_URI[azbox-initrd-azboxme.md5sum] = "b2fd2b894c2890dd83a003723df0ba60"
-SRC_URI[azbox-initrd-azboxme.sha256sum] = "5a9bcefd24df1785c7e403e1fba6e7d8cff89df70bc4aa03cb6684c6b470fd9c"
-SRC_URI[azbox-initrd-azboxminime.md5sum] = "5b7639dd8a18aa7e3a99bbd284dfdfc6"
-SRC_URI[azbox-initrd-azboxminime.sha256sum] = "3acca014a1c4153227542d6784b4948baaaa7d7ee58f52747186b3068023aad4"
+SRC_URI[azbox-initrd-azboxhd.md5sum] = "1c788f63ec2397064b70cf542888389a"
+SRC_URI[azbox-initrd-azboxhd.sha256sum] = "f5804ec6226fe9f2ba543aa1dcc457d134928eceb5e5e247bcdeeb61b1cc7cf9"
+SRC_URI[azbox-initrd-azboxme.md5sum] = "6b49d5de3533eb73d753b353eb8e0121"
+SRC_URI[azbox-initrd-azboxme.sha256sum] = "09d63650d18337a2b8a8ba7c9d33d2a1b939152f25990e3bfc3166eb5c1c4040"
+SRC_URI[azbox-initrd-azboxminime.md5sum] = "f9686a2373d3966f531ab783e41a2d80"
+SRC_URI[azbox-initrd-azboxminime.sha256sum] = "122a9f7e8b368b47e74eb8451d2dd856bed80dbe7e23c35cca63cb95dded891d"
 
 S = "${WORKDIR}/linux-${KV}"
 
