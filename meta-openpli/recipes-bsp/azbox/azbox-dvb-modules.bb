@@ -7,10 +7,8 @@ KV = "3.3.1-opensat"
 
 SRCDATE = "14052013"
 
-
 PV = "${KV}+${SRCDATE}"
 MACHINE_KERNEL_PR_append = ".19"
-
 
 SRC_URI = "http://azbox-enigma2-project.googlecode.com/files/${MACHINE}-dvb-modules-${KV}-oe-core-${SRCDATE}.tar.gz;name=azbox-dvb-modules-${MACHINE}"
 
@@ -22,7 +20,6 @@ SRC_URI[azbox-dvb-modules-azboxminime.md5sum] = "a168e4e50d911185b90da45ba627d23
 SRC_URI[azbox-dvb-modules-azboxminime.sha256sum] = "8740632dfe6764c2465a748310549d775ef20648f62bc1e50dbfe46db2062a12"
 
 S = "${WORKDIR}"
-
 
 PACKAGE_STRIP = "no"
 
@@ -45,7 +42,7 @@ do_install_azboxhd() {
 
 }
 
-do_install_azboxme() {
+do_install() {
     install -d ${D}/lib/modules/${KV}/extra
     install -d ${D}/${sysconfdir}/modutils
 
@@ -61,10 +58,4 @@ do_install_azboxme() {
 
 }
 
-do_install_azboxminime() {
- do_install_azboxme
-}
-
 FILES_${PN} = "/"
-
-
