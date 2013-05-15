@@ -2,13 +2,13 @@ DESCRIPTION = "AZ version info"
 SECTION = "base"
 PRIORITY = "required"
 require conf/license/openpli-gplv2.inc
-MAINTAINER = "Persian Professionals <persianpros@yahoo.com>"
+MAINTAINER = "RTi Team <rticore@gmail.com>"
 
 PV = "${AZVERSION}"
 PR = "${AZREVISION}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI_append = " file://bootfix"
+SRC_URI_append = "file://bootfix"
 
 URL = "http://openazbox.info"
 
@@ -43,5 +43,3 @@ do_install() {
 }
 
 FILES_${PN} += "/etc"
-
- 
