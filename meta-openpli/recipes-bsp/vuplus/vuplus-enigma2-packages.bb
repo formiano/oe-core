@@ -15,7 +15,6 @@ BRANCH = "vuplus_experimental"
 SRC_URI = "git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH}"
 SRC_URI += "file://3g.patch \
 	file://dlna.patch \
-	file://transcoding.patch \
 	"
 
 PACKAGES =+ "${PN}-src"
@@ -60,7 +59,6 @@ do_install() {
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/3GModemManager/script
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessAccessPoint
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/DeviceManager
-	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/TransCodingSetup
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/desc
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/keymap
@@ -88,9 +86,6 @@ do_install() {
 
 	install -m 0644 ${S}/lib/python/Plugins/SystemPlugins/DeviceManager/*.py \
 	${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/DeviceManager
-
-	install -m 0644 ${S}/lib/python/Plugins/SystemPlugins/TransCodingSetup/*.py \
-	${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/TransCodingSetup
 
 	install -m 0644 ${S}/lib/python/Plugins/Extensions/WebBrowser/*.py \
 	${S}/lib/python/Plugins/Extensions/WebBrowser/mp_wb_background.png \
@@ -126,7 +121,6 @@ do_install() {
 FILES_enigma2-plugin-systemplugins-3gmodemmanager = "/usr/lib/enigma2/python/Plugins/SystemPlugins/3GModemManager"
 FILES_enigma2-plugin-systemplugins-wirelessaccesspoint = "/usr/lib/enigma2/python/Plugins/SystemPlugins/WirelessAccessPoint"
 FILES_enigma2-plugin-systemplugins-devicemanager = "/usr/lib/enigma2/python/Plugins/SystemPlugins/DeviceManager"
-FILES_enigma2-plugin-systemplugins-transcodingsetup = "/usr/lib/enigma2/python/Plugins/SystemPlugins/TransCodingSetup"
 FILES_enigma2-plugin-extensions-webbrowser = "/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser"
 FILES_enigma2-plugin-extensions-streamtv = "/usr/lib/enigma2/python/Plugins/Extensions/StreamTV"
 FILES_enigma2-plugin-extensions-dlnabrowser = "/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser"
@@ -136,7 +130,6 @@ PACKAGES = "\
 	enigma2-plugin-systemplugins-3gmodemmanager \
 	enigma2-plugin-systemplugins-wirelessaccesspoint \
 	enigma2-plugin-systemplugins-devicemanager \
-	enigma2-plugin-systemplugins-transcodingsetup \
 	enigma2-plugin-extensions-webbrowser \
 	enigma2-plugin-extensions-streamtv \
 	enigma2-plugin-extensions-dlnabrowser \
