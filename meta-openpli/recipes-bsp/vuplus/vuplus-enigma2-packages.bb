@@ -9,7 +9,7 @@ inherit gitpkgv
  
 PV = "experimental-git${SRCPV}"
 PKGV = "experimental-git${GITPKGV}"
-PR = "r6"
+PR = "${AZVERSION}.${AZREVISION}"
 BRANCH = "vuplus_experimental"
 
 SRC_URI = "git://125.141.231.152/git/dvbapp.git;protocol=http;branch=${BRANCH}"

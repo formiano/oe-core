@@ -1,5 +1,5 @@
 DESCRIPTION = "E2OpenPlugins Task"
-PR = "r2"
+PR = "${AZVERSION}.${AZREVISION}"
 
 inherit task
 

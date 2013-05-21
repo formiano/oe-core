@@ -80,7 +80,7 @@ DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm"
 MACHINE_FEATURES += "kernel26 alsa usbhost wifi nl80211"
 MACHINE_FEATURES += "3dtv switchoff lpcm textlcd 32bpp hdtv dvbapi5 dvb-c blindscan-dvbs"
 
-MACHINE_KERNEL_PR = "r1"
+MACHINE_KERNEL_PR = "${AZVERSION}.${AZREVISION}"
 
 PREFERRED_VERSION_linux-libc-headers = "3.3"
 

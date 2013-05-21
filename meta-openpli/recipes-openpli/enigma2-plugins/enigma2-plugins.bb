@@ -10,7 +10,7 @@ inherit gitpkgv
 
 PV = "experimental-git${SRCPV}"
 PKGV = "experimental-git${GITPKGV}"
-PR = "r9"
+PR = "${AZVERSION}.${AZREVISION}"
 
 SRC_URI="git://git.code.sf.net/p/openpli/plugins-enigma2;protocol=git"
 

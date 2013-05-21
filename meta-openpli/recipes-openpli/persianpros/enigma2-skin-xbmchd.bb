@@ -3,9 +3,9 @@ require conf/license/openpli-gplv2.inc
 SRCREV_pn-${PN} ?= "${AUTOREV}"
 inherit gitpkgv
 
-PV = "rc3+git${SRCPV}"
-PKGV = "rc3+git${GITPKGV}"
-PR = "r3"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
+PR = "${AZVERSION}.${AZREVISION}"
 
 PACKAGES = "${PN}"
 
