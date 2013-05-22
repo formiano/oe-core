@@ -3,7 +3,7 @@ SECTION = "console/utils"
 require conf/license/license-gplv2.inc
 PROVIDES = "azbox-minime-packer"
 
-PV="1.4"
+PV="${AZVERSION}.${AZREVISION}"
 SRC_URI = "file://pack_minime_image.c \
 	   file://Makefile.am \
 	   file://configure.ac"

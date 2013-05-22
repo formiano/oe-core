@@ -4,7 +4,7 @@ PRIORITY = "required"
 LICENSE = "CLOSED"
 
 PV = "1.0"
-PR = "r1"
+PR = "${AZVERSION}.${AZREVISION}"
 
 inherit allarch
 

@@ -4,7 +4,7 @@ PRIORITY = "optional"
 LICENSE = "GPL"
 
 PV = "1.3"
-PR = "r1"
+PR = "${AZVERSION}.${AZREVISION}"
 
 PROVIDES += "virtual/showiframe"
 RPROVIDES_${PN} += "virtual/showiframe"

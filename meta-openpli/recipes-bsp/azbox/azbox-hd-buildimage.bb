@@ -3,7 +3,7 @@ SECTION = "console/utils"
 require conf/license/license-gplv2.inc
 PROVIDES = "azbox-hd-buildimage"
 
-PV="1.4"
+PV="${AZVERSION}.${AZREVISION}"
 SRC_URI = "file://pack_e2.c \
 	   file://Makefile.am \
 	   file://configure.ac"
