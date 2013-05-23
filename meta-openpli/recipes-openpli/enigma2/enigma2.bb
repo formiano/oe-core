@@ -165,7 +165,10 @@ PR = "${AZVERSION}.${AZREVISION}"
 
 ENIGMA2_BRANCH ?= "master"
 SRC_URI = "git://git.code.sf.net/p/openpli/enigma2;protocol=git;branch=${ENIGMA2_BRANCH}"
-SRC_URI += "file://e2_pcr.patch"
+SRC_URI += "\
+	file://e2_pcr.patch \
+	file://add_more_timeout.patch \
+"
 
 SRC_URI_append_azboxhd = " \
  file://azboxradiobootlogo.mvi \
