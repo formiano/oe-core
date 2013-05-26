@@ -171,7 +171,6 @@ SRC_URI += "\
 "
 
 SRC_URI_append_azboxhd = " \
- file://azboxradiobootlogo.mvi \
  file://azboxe2.patch \
  file://lcdchar.patch \
  file://vfdskin.patch \
@@ -185,7 +184,6 @@ SRC_URI_append_azboxhd = " \
 "
 
 SRC_URI_append_azboxme = " \
- file://azboxradiobootlogo.mvi \
  file://azboxe2.patch \
  file://vfdskin.patch \
  file://rc.png \
@@ -198,7 +196,6 @@ SRC_URI_append_azboxme = " \
 "
 
 SRC_URI_append_azboxminime = " \
- file://azboxradiobootlogo.mvi \
  file://azboxe2.patch \
  file://rc.png \
  file://rcold.png \
@@ -287,7 +284,6 @@ do_openpli_preinstall() {
 }
 
 do_openpli_preinstall_azboxme() {
- 	install -m 0644 ${WORKDIR}/azboxradiobootlogo.mvi ${S}/data/radio.mvi
 	install -d ${D}${sysconfdir}/enigma2	
  	install -m 0644 ${WORKDIR}/rc.png ${S}/data/skin_default/
 	install -m 0644 ${WORKDIR}/rcold.png ${S}/data/skin_default/
@@ -299,7 +295,6 @@ do_openpli_preinstall_azboxme() {
 }
 
 do_openpli_preinstall_azboxminime() {
- 	install -m 0644 ${WORKDIR}/azboxradiobootlogo.mvi ${S}/data/radio.mvi
 	install -d ${D}${sysconfdir}/enigma2	
  	install -m 0644 ${WORKDIR}/rc.png ${S}/data/skin_default/
 	install -m 0644 ${WORKDIR}/rcold.png ${S}/data/skin_default/
@@ -311,7 +306,6 @@ do_openpli_preinstall_azboxminime() {
 }
 
 do_openpli_preinstall_azboxhd() {
- 	install -m 0644 ${WORKDIR}/azboxradiobootlogo.mvi ${S}/data/radio.mvi
 	install -d ${D}${sysconfdir}/enigma2	
  	install -m 0644 ${WORKDIR}/rc.png ${S}/data/skin_default/
 	install -m 0644 ${WORKDIR}/rcold.png ${S}/data/skin_default/

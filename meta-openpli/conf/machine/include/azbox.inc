@@ -90,7 +90,6 @@ PREFERRED_VERSION_mtd-utils-native = "1.4.9"
 GLIBC_EXTRA_OECONF = "--with-tls"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-azbox"
-PREFERRED_PROVIDER_virtual/showiframe = "azbox-dvb-tools"
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "azbox-blindscan-dvbs-utils"
 
 require conf/machine/include/tune-mips32.inc

@@ -15,7 +15,7 @@ IMAGE_INSTALL = " \
 	early-configure \
 	fakelocale \
 	nfs-utils-client \
-	openpli-bootlogo \
+	az-bootlogo \
 	opkg \
 	sambaserver \
 	sdparm \
