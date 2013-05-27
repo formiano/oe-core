@@ -1,0 +1,74 @@
+diff -Naur a/lib/python/Plugins/Extensions/DLNABrowser/plugin.py b/lib/python/Plugins/Extensions/DLNABrowser/plugin.py
+--- a/lib/python/Plugins/Extensions/DLNABrowser/plugin.py	2013-05-19 10:50:36.000000000 +0430
++++ b/lib/python/Plugins/Extensions/DLNABrowser/plugin.py	2013-05-27 23:35:06.370409488 +0430
+@@ -257,8 +257,8 @@
+ class DLNAStreamPlayer(Screen, InfoBarNotifications):
+ 	skin = 	"""
+ 		<screen name="DLNAStreamPlayer" flags="wfNoBorder" position="center,620" size="455,53" title="DLNAStreamPlayer" backgroundColor="transparent">
+-			<ePixmap pixmap="Vu_HD/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
+-			<ePixmap pixmap="Vu_HD/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
++			<ePixmap pixmap="skin_default/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
++			<ePixmap pixmap="skin_default/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
+ 
+ 			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+ 				<convert type="ServicePosition">Gauge</convert>
+@@ -905,4 +905,4 @@
+ 	session.open(DLNADeviceBrowser)
+                                                            
+ def Plugins(**kwargs):
+-	return PluginDescriptor(name=_("DLNA/uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
++	return PluginDescriptor(name=_("DLNA-uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+diff -Naur a/lib/python/Plugins/Extensions/VuplusEvent/plugin.py b/lib/python/Plugins/Extensions/VuplusEvent/plugin.py
+--- a/lib/python/Plugins/Extensions/VuplusEvent/plugin.py	2013-05-19 10:50:36.000000000 +0430
++++ b/lib/python/Plugins/Extensions/VuplusEvent/plugin.py	2013-05-27 23:35:06.390409488 +0430
+@@ -190,9 +190,9 @@
+ 	skin = """
+ 		<screen name="MessageBoxGenuine" position="center,center" size="600,10" title="Message">
+ 		<widget name="text" position="65,8" size="420,0" font="Regular;22" />
+-		<widget name="ErrorPixmap" pixmap="Vu_HD/icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
+-		<widget name="QuestionPixmap" pixmap="Vu_HD/icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
+-		<widget name="InfoPixmap" pixmap="Vu_HD/icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
++		<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
++		<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
++		<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
+ 		<widget name="list" position="100,100" size="380,375" transparent="1" />
+ 		<applet type="onLayoutFinish">
+ # this should be factored out into some helper code, but currently demonstrates applets.
+diff -Naur a/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py b/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py
+--- a/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py	2013-05-19 10:50:36.000000000 +0430
++++ b/lib/python/Plugins/SystemPlugins/3GModemManager/plugin.py	2013-05-27 23:35:06.294409486 +0430
+@@ -2,7 +2,6 @@
+ 
+ from Screens.Screen import Screen
+ from Screens.MessageBox import MessageBox
+-from Screens.DefaultWizard import DefaultWizard
+ from Screens.Standby import TryQuitMainloop
+ from Screens.VirtualKeyBoard import VirtualKeyBoard
+ 
+diff -Naur a/lib/python/Plugins/SystemPlugins/FactoryTest/plugin.py b/lib/python/Plugins/SystemPlugins/FactoryTest/plugin.py
+--- a/lib/python/Plugins/SystemPlugins/FactoryTest/plugin.py	2013-05-19 10:50:36.000000000 +0430
++++ b/lib/python/Plugins/SystemPlugins/FactoryTest/plugin.py	2013-05-27 23:35:06.306409487 +0430
+@@ -39,9 +39,9 @@
+ 	skin = """
+ 		<screen position="center,center" size="600,10" title="Message">
+ 			<widget name="text" position="65,8" size="420,0" font="Regular;22" />
+-			<widget name="ErrorPixmap" pixmap="Vu_HD/icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
+-			<widget name="QuestionPixmap" pixmap="Vu_HD/icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
+-			<widget name="InfoPixmap" pixmap="Vu_HD/icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
++			<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="5,5" size="53,53" alphatest="blend" />
++			<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="5,5" size="53,53" alphatest="blend" />
++			<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="5,5" size="53,53" alphatest="blend" />
+ 			<widget name="list" position="100,100" size="380,375" transparent="1" backgroundColor="darkgrey" />
+ 			<!-- Signal Quality -->
+ 			<eLabel text="SNR : " position="60,130" size="60,25" font="Regular;25" transparent="1" />
+@@ -2576,8 +2576,8 @@
+ 	skin = """
+ 		<screen position="center,center" size="370,190" title="Aging Test - settings" >
+ 			<widget name="config" zPosition="2" position="10,10" size="360,180" scrollbarMode="showOnDemand" transparent="1" />
+-			<ePixmap pixmap="Vu_HD/buttons/green.png" position="50,135" size="25,25" alphatest="on" />
+-			<ePixmap pixmap="Vu_HD/buttons/red.png" position="215,135" size="25,25" alphatest="on" />
++			<ePixmap pixmap="skin_default/buttons/green.png" position="50,135" size="25,25" alphatest="on" />
++			<ePixmap pixmap="skin_default/buttons/red.png" position="215,135" size="25,25" alphatest="on" />
+ 			<widget source="key_red" render="Label" position="75,135" zPosition="1" size="90,25" font="Regular;20" halign="center" valign="center" transparent="1" />
+ 			<widget source="key_green" render="Label" position="240,135" zPosition="1" size="90,25" font="Regular;20" halign="center" valign="center" transparent="1" />
+ 		</screen>"""
