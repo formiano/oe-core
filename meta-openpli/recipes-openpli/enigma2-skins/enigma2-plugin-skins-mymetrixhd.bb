@@ -27,6 +27,7 @@ do_install() {
 	cp -rp ${S}/usr/* ${D}/usr/
 	install -d ${D}/etc
 	cp -rp ${S}/etc/* ${D}/etc/
+	find ${D}/usr/ -name '*.psd' -exec rm {} \;	
 }
 
 PACKAGES =+ "${PN}-src"
