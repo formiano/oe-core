@@ -12,7 +12,7 @@ PKGV = "experimental-git${GITPKGV}"
 PR = "${AZVERSION}.${AZREVISION}"
 BRANCH = "vuplus_experimental"
 
-SRC_URI = "git://125.141.231.152/git/dvbapp.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://code.vuplus.com/git/dvbapp.git;protocol=http;branch=${BRANCH}"
 SRC_URI += "file://vuplusplugins.patch"
 
 PACKAGES =+ "${PN}-src"
