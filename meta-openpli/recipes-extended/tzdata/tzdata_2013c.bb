@@ -19,7 +19,7 @@ SRC_URI[tzdata.sha256sum] = "e597a7eb239155eb2247fd4788f7fa10bf21d6469961200a6ca
 
 S = "${WORKDIR}"
 
-DEFAULT_TIMEZONE ?= "Iran"
+DEFAULT_TIMEZONE ?= "CET"
 
 TZONES= "africa antarctica asia australasia europe northamerica southamerica  \
          factory solar87 solar88 solar89 etcetera backward systemv \
