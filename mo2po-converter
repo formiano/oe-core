@@ -1,0 +1,21 @@
+#!/bin/bash
+if [ $# -ne 1 ] ; then
+	echo ""
+	echo "mo 2 po converter by Persian Prince v1"
+	echo ""
+	echo "http://e2pe.com"
+	echo ""
+        echo "Usage $0 [directory]" 
+	echo ""
+        exit 1
+fi
+find $1 -type f  -print0 | while IFS= read -r -d $'\0' file; do
+    (
+    cd "$(dirname "$file")"
+    filename="$(basename "$file")"
+    echo "converting to po file , please wait"
+    msgunfmt "$filename" -o "$filename".po
+    for filename in *.mo.po ; do mv $filename `echo $filename | sed 's/\(.*\.\)mo.po/\1po/'` ; done
+    )
+done
+
