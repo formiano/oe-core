@@ -1,0 +1,48 @@
+diff -Naur a/src/hostmon.c b/src/hostmon.c
+--- a/src/hostmon.c	2013-01-24 12:26:48.927103000 +0330
++++ b/src/hostmon.c	2013-01-24 12:32:26.879110284 +0330
+@@ -31,7 +31,7 @@
+ #include <linux/if_packet.h>
+ #include <linux/if_ether.h>
+ #include <linux/if_fddi.h>
+-#include <linux/if_tr.h>
++#include <netinet/if_tr.h>
+ #include <net/if_arp.h>
+ #include <stdlib.h>
+ #include <time.h>
+diff -Naur a/src/othptab.c b/src/othptab.c
+--- a/src/othptab.c	2013-01-24 12:21:28.671097000 +0330
++++ b/src/othptab.c	2013-01-24 12:23:58.483100738 +0330
+@@ -32,7 +32,7 @@
+ /*#include <linux/socket.h>*/
+ #include <linux/if.h>
+ #include <linux/if_ether.h>
+-#include <linux/if_tr.h>
++#include <netinet/if_tr.h>
+ #include <linux/if_fddi.h>
+ #include <linux/if_arp.h>
+ #include <netdb.h>
+diff -Naur a/src/packet.c b/src/packet.c
+--- a/src/packet.c	2013-01-24 12:21:28.675097000 +0330
++++ b/src/packet.c	2013-01-24 12:24:22.059101182 +0330
+@@ -36,7 +36,7 @@
+ #include <linux/if_packet.h>
+ #include <linux/if_ether.h>
+ #include <linux/if_fddi.h>
+-#include <linux/if_tr.h>
++#include <netinet/if_tr.h>
+ #include <linux/sockios.h>
+ #include <msgboxes.h>
+ #include "deskman.h"
+diff -Naur a/src/tcptable.h b/src/tcptable.h
+--- a/src/tcptable.h	2013-01-24 12:26:48.927103000 +0330
++++ b/src/tcptable.h	2013-01-24 12:32:44.943110620 +0330
+@@ -22,7 +22,7 @@
+ #include <linux/if_packet.h>
+ #include <linux/if_ether.h>
+ #include <linux/if_fddi.h>
+-#include <linux/if_tr.h>
++#include <netinet/if_tr.h>
+ #include <netinet/ip.h>
+ #include <netinet/udp.h>
+ #include "servname.h"

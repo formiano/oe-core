@@ -3,6 +3,7 @@ require conf/license/openpli-gplv2.inc
 inherit task image
 
 IMAGE_INSTALL = " \
+	kernel-params \
 	${ROOTFS_PKGMANAGE} \
 	3rd-party-feed-configs \
 	avahi-daemon \
@@ -25,7 +26,6 @@ IMAGE_INSTALL = " \
 	tuxbox-links \
 	tzdata \
 	util-linux-sfdisk \
-	volatile-media \
 	vsftpd \
 	dvbsnoop \
 	hddtemp \
