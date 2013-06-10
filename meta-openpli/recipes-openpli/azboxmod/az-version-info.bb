@@ -31,9 +31,7 @@ do_install() {
 			fi
 
 			install -d ${D}/etc
-			# generate /etc/image-version
-			echo "box_type=${MACHINE}" > ${D}/etc/image-version
-			echo "build_type=${BUILDTYPE}" >> ${D}/etc/image-version			
+			# generate /etc/image-version			
 			echo "STB=${MACHINE}" > ${D}/etc/image-version
 			echo "version=${AZVERSION}.${AZREVISION}" >> ${D}/etc/image-version
 			echo "build=${AZREVISION}" >> ${D}/etc/image-version
