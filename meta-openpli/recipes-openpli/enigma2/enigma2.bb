@@ -110,10 +110,6 @@ GST_UGLY_RDEPS = " \
 	gst-plugins-ugly-mpegstream \
 	"
 
-# DVD playback is integrated, we need the libraries
-RDEPENDS_${PN} += "libdreamdvd"
-RRECOMMENDS_${PN} += "libdvdcss"
-
 #make sure default skin is installed.
 RDEPENDS_${PN} += "${E2DEFAULTSKIN} "
 
