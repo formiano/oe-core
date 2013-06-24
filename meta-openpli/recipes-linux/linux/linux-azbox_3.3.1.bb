@@ -10,8 +10,13 @@ DEPENDS = "genromfs-native gcc"
 DEPENDS_azboxhd = "genromfs-native azbox-hd-buildimage gcc"
 DEPENDS_azboxminime = "genromfs-native azbox-minime-packer gcc"
 
+PKG_kernel-base = "kernel-base"
+PKG_kernel-image = "kernel-image"
+RPROVIDES_kernel-base = "kernel-${KERNEL_VERSION}"
+RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
+
 SRC_URI += "http://azbox-enigma2-project.googlecode.com/files/linux-azbox-${KV}-new-2.tar.bz2;name=azbox-kernel \
-	   file://${MACHINE}_defconfig \
+	   file://defconfig \
 	   file://genzbf.c \
 	   file://sigblock.h \
 	   file://zboot.h \
@@ -26,7 +31,6 @@ SRC_URI_append_azboxhd += "http://azbox-enigma2-project.googlecode.com/files/ini
 SRC_URI_append_azboxme = "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
 
 SRC_URI_append_azboxminime = "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
-
 
 SRC_URI[azbox-kernel.md5sum] = "dfd04abeaf3741b3d2a44428ca5aeaa1"
 SRC_URI[azbox-kernel.sha256sum] = "31b73397220d85aedf3c914026371fc1eeac67e3de09a5610b70b209d2a8b9df"
@@ -53,7 +57,7 @@ FILES_kernel-image = "/boot/zbimage-linux-xload"
 CFLAGS_prepend = "-I${WORKDIR} "
 
 do_configure_prepend() {
-	oe_machinstall -m 0644 ${WORKDIR}/${MACHINE}_defconfig ${S}/.config
+	oe_machinstall -m 0644 ${WORKDIR}/defconfig ${S}/.config
 	oe_runmake oldconfig
 }
 
