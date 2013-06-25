@@ -1,5 +1,7 @@
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
-	azbox-dvb-modules \				 
+	azbox-dvb-modules \
+	module-init-tools-cross \
+	module-init-tools \	
 	"
 
 DVBPROVIDER = "kernel"
