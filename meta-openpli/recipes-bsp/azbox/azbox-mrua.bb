@@ -3,7 +3,7 @@ SECTION = "libs"
 PRIORITY = "required"
 LICENSE = "CLOSED"
 
-PR = "${AZVERSION}.${AZREVISION}"
+PR = "${AZREVISION}"
 
 SRCDATE = "3.11-1"
 SRCDATE_azboxhd = "2.8-3"

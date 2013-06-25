@@ -20,7 +20,7 @@ RREPLACES_${PN} += "azbox-blindscan-utils"
 RCONFLICTS_${PN} += "azbox-blindscan-utils"
 
 PV = "1.3"
-PR = "${AZVERSION}.${AZREVISION}"
+PR = "${AZREVISION}"
 
 S = "${WORKDIR}/blindscan-utils"
 
