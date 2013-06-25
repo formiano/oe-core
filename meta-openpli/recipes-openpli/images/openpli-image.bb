@@ -33,6 +33,7 @@ IMAGE_INSTALL = " \
 	parted \
 	util-linux-blkid \
 	az-version-info \
+	enigma2-compat \
 	"
 
 OPTIONAL_PACKAGES ?= ""

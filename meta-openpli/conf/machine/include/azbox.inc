@@ -9,7 +9,6 @@ DVBPROVIDER = "kernel"
 MACHINE_EXTRA_RRECOMMENDS += " \
 	gst-plugin-dvbmediasink \			
 	azbox-mrua \
-	azbox-compat \
 	"
 
 DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm"
