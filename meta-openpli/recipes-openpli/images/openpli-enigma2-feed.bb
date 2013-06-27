@@ -3,5 +3,7 @@
 # components may use them and install on demand.
 
 require openpli-enigma2-image.bb
+require openpli-image.bb
 
 DEPENDS += "${OPTIONAL_PACKAGES}"
+DEPENDS += "${ENIGMA2_OPTIONAL}"

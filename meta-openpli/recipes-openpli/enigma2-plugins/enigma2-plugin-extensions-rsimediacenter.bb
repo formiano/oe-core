@@ -10,7 +10,7 @@ inherit gitpkgv pkgconfig
 
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "git://github.com/persianpros/rsimediacenter-plugin.git;protocol=git"
 
@@ -58,8 +58,8 @@ do_install_azboxhd() {
         install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/
         install -m 0644 ${S}/plugin/skins/default/images/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/
 
-        install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/home/
-        install -m 0644 ${S}/plugin/skins/default/images/home/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/home/
+        install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/buttons/
+        install -m 0644 ${S}/plugin/skins/default/images/buttons/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/buttons/
 
         install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/icons/
         install -m 0644 ${S}/plugin/skins/default/images/icons/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/icons/
@@ -93,8 +93,8 @@ do_install() {
         install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/
         install -m 0644 ${S}/plugin/skins/default/images/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/
 
-        install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/home/
-        install -m 0644 ${S}/plugin/skins/default/images/home/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/home/
+        install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/buttons/
+        install -m 0644 ${S}/plugin/skins/default/images/buttons/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/buttons/
 
         install -d ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/icons/
         install -m 0644 ${S}/plugin/skins/default/images/icons/*.* ${D}/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/icons/
@@ -106,5 +106,5 @@ FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/fonts/"
 FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/"
 FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/"
 FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/"
-FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/home/"
+FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/buttons/"
 FILES_${PN} += "/usr/lib/enigma2/python/Plugins/Extensions/MediaCenter/skins/default/images/icons/"

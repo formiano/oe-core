@@ -75,6 +75,10 @@ OPTIONAL_PACKAGES += " \
 	wakelan \
 	xfsprogs \
 	zeroconf \
+	volatile-media \
+	enigma2-plugin-skins-magic \
+	fuse-exfat \
+	hotplug-e2-helper \
 	"
 
 export IMAGE_BASENAME = "openazbox"
