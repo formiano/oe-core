@@ -11,7 +11,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
 	azbox-mrua \
 	"
 
-DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm"
+DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix"
 
 MACHINE_FEATURES += "kernel26 alsa usbhost wifi nl80211 3dtv switchoff lpcm textlcd 32bpp hdtv dvbapi5 dvb-c blindscan-dvbs"
 
