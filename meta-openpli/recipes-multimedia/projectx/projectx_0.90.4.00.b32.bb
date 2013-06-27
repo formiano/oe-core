@@ -5,7 +5,7 @@ SRCDATE = "20090824"
 PR = "r1"
 
 SRC_URI = "cvs://anonymous@project-x.cvs.sourceforge.net/cvsroot/project-x;module=Project-X;method=pserver \
-           http://dreamboxupdate.com/download/opendreambox/${PN}-${TARGET_ARCH}-bin-20100218-${PV}-${DISTRO_VERSION}-hard.tar.bz2 \
+           http://dreamboxupdate.com/download/opendreambox/${PN}-mipsel-bin-20100218-${PV}-2.0.0-hard.tar.bz2 \
            file://dreambox-headless.patch \
            file://Makefile"
 SRC_URI[md5sum] = "2b53f925d0207b43b50fa98e5b304722"
