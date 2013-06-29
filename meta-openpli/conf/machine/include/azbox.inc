@@ -1,7 +1,5 @@
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
-	azbox-dvb-modules \
-	module-init-tools-cross \
-	module-init-tools \	
+	azbox-dvb-modules \	
 	"
 
 DVBPROVIDER = "kernel"
@@ -9,6 +7,11 @@ DVBPROVIDER = "kernel"
 MACHINE_EXTRA_RRECOMMENDS += " \
 	gst-plugin-dvbmediasink \			
 	azbox-mrua \
+	"
+
+EXTRA_IMAGEDEPENDS += " \
+	module-init-tools-cross \
+	module-init-tools \	
 	"
 
 DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix"

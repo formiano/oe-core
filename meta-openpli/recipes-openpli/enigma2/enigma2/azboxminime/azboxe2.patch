@@ -1,7 +1,7 @@
 diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
---- a/lib/dvb/dvb.cpp	2013-01-06 20:14:04.000000000 +0100
-+++ b/lib/dvb/dvb.cpp	2013-01-08 21:32:33.000000000 +0100
-@@ -974,6 +974,8 @@
+--- a/lib/dvb/dvb.cpp	2013-06-29 15:08:51.828393000 +0430
++++ b/lib/dvb/dvb.cpp	2013-06-29 15:10:33.208393843 +0430
+@@ -968,6 +968,8 @@
  		iDVBAdapter *adapter = fe ? fe->m_adapter : m_adapter.begin(); /* look for a demux on the same adapter as the frontend, or the first adapter for dvr playback */
  		int source = fe ? fe->m_frontend->getDVBID() : -1;
  		cap |= capHoldDecodeReference; // this is checked in eDVBChannel::getDemux
@@ -10,7 +10,7 @@ diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
  		if (!fe)
  		{
  			/*
-@@ -991,8 +993,16 @@
+@@ -985,8 +987,16 @@
  			{
  				if (!i->m_inuse)
  				{
@@ -29,10 +29,11 @@ diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
  				}
  				else
  				{
-@@ -1007,6 +1017,7 @@
+@@ -1000,7 +1010,7 @@
+ 			}
  			if (fe)
  			{
- 				++i;
+-				++i;
 +				++n;
  			}
  			else
