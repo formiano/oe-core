@@ -97,6 +97,7 @@ GST_BAD_RDEPS = " \
 	gst-plugins-bad-rtmp \
 	gst-plugins-bad-vcdsrc \
 	gst-plugins-bad-fragmented \
+	gst-plugins-bad-faad \
 	"
 
 GST_UGLY_RDEPS = " \
