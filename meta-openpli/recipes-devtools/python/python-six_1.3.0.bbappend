@@ -1,6 +1,4 @@
-PRINC = "2"
-
-RDEPENDS_${PN} += "libusb1"
+PRINC = "1"
 
 inherit openpli-distutils
 
@@ -16,3 +14,4 @@ FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
 	"
+
