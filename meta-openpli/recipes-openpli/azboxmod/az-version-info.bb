@@ -1,6 +1,5 @@
 DESCRIPTION = "AZ version info"
 MAINTAINER = "RTi Team <rticore@gmail.com>"
-LICENSE = "GPL2"
 require conf/license/license-gplv2.inc
 
 PV = "${AZVERSION}"
