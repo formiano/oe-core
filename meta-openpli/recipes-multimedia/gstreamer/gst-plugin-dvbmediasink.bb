@@ -13,7 +13,7 @@ inherit gitpkgv
 
 PV = "0.10.0+git${SRCPV}"
 PKGV = "0.10.0+git${GITPKGV}"
-PR = "${AZVERSION}.${AZREVISION}"
+PR = "${AZREVISION}"
 
 inherit autotools pkgconfig
 
