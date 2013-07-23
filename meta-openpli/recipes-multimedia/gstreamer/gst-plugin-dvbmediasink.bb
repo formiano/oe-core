@@ -5,7 +5,7 @@ require conf/license/license-gplv2.inc
 
 DEPENDS = "gstreamer gst-plugins-base libdca"
 
-SRC_URI = "https://github.com/OpenAZBox/azbox-dvbmediasink.git;protocol=git"
+SRC_URI = "git://github.com/OpenAZBox/azbox-dvbmediasink.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
