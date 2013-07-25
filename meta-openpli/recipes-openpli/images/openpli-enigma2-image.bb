@@ -10,8 +10,6 @@ WIFI_DRIVERS = " \
 	firmware-rtl8712u \
 	firmware-zd1211 \
 	\
-	kernel-module-ath9k-htc \
-	kernel-module-carl9170 \
 	kernel-module-r8712u \
 	kernel-module-rt2500usb \
 	kernel-module-rt2800usb \
@@ -58,7 +56,6 @@ DEPENDS += " \
 	enigma2 \
 	enigma2-pliplugins \
 	enigma2-plugins \
-	enigma2-skins \
 	"
 
 ENIGMA2_OPTIONAL = " \
@@ -80,6 +77,7 @@ ENIGMA2_OPTIONAL = " \
 	cdfs cdtextinfo \
 	meta-enigma2-dvdburn \
 	enigma2-plugin-skins-mymetrixhd \
+	enigma2-skins \
 	"
 
 IMAGE_INSTALL += " \
