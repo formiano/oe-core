@@ -20,7 +20,7 @@ MACHINE_FEATURES += "kernel26 alsa usbhost wifi nl80211 3dtv switchoff lpcm text
 
 MACHINE_KERNEL_PR = "${AZVERSION}.${AZREVISION}"
 
-PREFERRED_VERSION_linux-azbox = "3.3.1"
+PREFERRED_VERSION_linux-azbox = "3.9.2"
 PREFERRED_VERSION_linux-libc-headers = "3.3"
 
 GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"

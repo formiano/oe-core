@@ -2,8 +2,9 @@ DESCRIPTION = "Linux kernel for ${MACHINE}"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/linux-${KV}/COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-KV = "3.3.1"
-SRCDATE = "14052013"
+KV = "3.9.2"
+SRCDATE = "22072013"
+SRCDATE_azboxme = "24072013"
 
 DEPENDS = "genromfs-native gcc"
 DEPENDS_azboxhd = "genromfs-native azbox-hd-buildimage gcc"
@@ -14,31 +15,29 @@ PKG_kernel-image = "kernel-image"
 RPROVIDES_kernel-base = "kernel-${KERNEL_VERSION}"
 RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
 
-SRC_URI += "http://azbox-enigma2-project.googlecode.com/files/linux-azbox-${KV}-new-2.tar.bz2;name=azbox-kernel \
+SRC_URI += "https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KV}.tar.bz2;name=azbox-kernel \
 	   file://defconfig \
 	   file://genzbf.c \
 	   file://sigblock.h \
 	   file://zboot.h \
 	   file://emhwlib_registers_tango2.h \
-	   file://sata.patch \
+	   file://kernel-3.9.2.patch \
 	   "
 
-SRC_URI_append_azboxhd += "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE} \
-	   file://hdide.patch \
-	   "
+SRC_URI_append_azboxhd += "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${KV}-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
 
-SRC_URI_append_azboxme = "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
+SRC_URI_append_azboxme = "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${KV}-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
 
-SRC_URI_append_azboxminime = "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
+SRC_URI_append_azboxminime = "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${KV}-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
 
-SRC_URI[azbox-kernel.md5sum] = "dfd04abeaf3741b3d2a44428ca5aeaa1"
-SRC_URI[azbox-kernel.sha256sum] = "31b73397220d85aedf3c914026371fc1eeac67e3de09a5610b70b209d2a8b9df"
-SRC_URI[azbox-initrd-azboxhd.md5sum] = "1c788f63ec2397064b70cf542888389a"
-SRC_URI[azbox-initrd-azboxhd.sha256sum] = "f5804ec6226fe9f2ba543aa1dcc457d134928eceb5e5e247bcdeeb61b1cc7cf9"
-SRC_URI[azbox-initrd-azboxme.md5sum] = "6b49d5de3533eb73d753b353eb8e0121"
-SRC_URI[azbox-initrd-azboxme.sha256sum] = "09d63650d18337a2b8a8ba7c9d33d2a1b939152f25990e3bfc3166eb5c1c4040"
-SRC_URI[azbox-initrd-azboxminime.md5sum] = "f9686a2373d3966f531ab783e41a2d80"
-SRC_URI[azbox-initrd-azboxminime.sha256sum] = "122a9f7e8b368b47e74eb8451d2dd856bed80dbe7e23c35cca63cb95dded891d"
+SRC_URI[azbox-kernel.md5sum] = "661100fdf8a633f53991684b555373ba"
+SRC_URI[azbox-kernel.sha256sum] = "dfcaa8bf10f87ad04fc46994c3b4646eae914a9eb89e76317fdbbd29f54f1076"
+SRC_URI[azbox-initrd-azboxhd.md5sum] = "cdb54538f4233bae6e923ed66929dc21"
+SRC_URI[azbox-initrd-azboxhd.sha256sum] = "7acaec783aca6b1748475b5483f00f5a54496aac069578a776d7a59bf4142cd2"
+SRC_URI[azbox-initrd-azboxme.md5sum] = "2defceea7bd1e11e59b47e4a2d2c2538"
+SRC_URI[azbox-initrd-azboxme.sha256sum] = "8a927de9bb4a00c71f993638abc15847ead9706de171036e15f4844113eadce6"
+SRC_URI[azbox-initrd-azboxminime.md5sum] = "bf37b5197100fca73dd7dd11609f4d0a"
+SRC_URI[azbox-initrd-azboxminime.sha256sum] = "41c4978f2f266062604f294240d66f2fc0c06790f23cb4be4022d3a6f6a7b845"
 
 S = "${WORKDIR}/linux-${KV}"
 
@@ -66,7 +65,6 @@ kernel_do_compile() {
 	install -m 0755 ${WORKDIR}/genzbf ${S}/arch/mips/boot/
 
 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
 	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}" AR="${AR}" OBJDUMP="${OBJDUMP}" NM="${NM}"
 	oe_runmake modules CC="${KERNEL_CC}" LD="${KERNEL_LD}" AR="${AR}" OBJDUMP="${OBJDUMP}"
 }
