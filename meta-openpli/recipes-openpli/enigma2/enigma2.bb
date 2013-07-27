@@ -170,7 +170,6 @@ SRC_URI += "\
 SRC_URI_append_azboxhd = " \
  file://azboxe2.patch \
  file://lcdchar.patch \
- file://vfdskin.patch \
  file://rc.png \
  file://rcold.png \
  file://rcpositions.xml \
@@ -182,7 +181,6 @@ SRC_URI_append_azboxhd = " \
 
 SRC_URI_append_azboxme = " \
  file://azboxe2.patch \
- file://vfdskin.patch \
  file://rc.png \
  file://rcold.png \
  file://rcpositions.xml \
