@@ -15,14 +15,29 @@ PKG_kernel-image = "kernel-image"
 RPROVIDES_kernel-base = "kernel-${KERNEL_VERSION}"
 RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
 
-SRC_URI += "https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KV}.tar.bz2;name=azbox-kernel \
-	   file://defconfig \
-	   file://genzbf.c \
-	   file://sigblock.h \
-	   file://zboot.h \
-	   file://emhwlib_registers_tango2.h \
-	   file://kernel-3.9.2.patch \
-	   "
+SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${KV}.tar.bz2;name=azbox-kernel \
+	file://defconfig \
+	file://genzbf.c \
+	file://sigblock.h \
+	file://zboot.h \
+	file://emhwlib_registers_tango2.h \
+	file://kernel-3.9.2.patch \
+	file://add-dmx-source-timecode.patch \
+	file://af9015-output-full-range-SNR.patch \
+	file://af9033-output-full-range-SNR.patch \
+	file://as102-adjust-signal-strength-report.patch \
+	file://as102-scale-MER-to-full-range.patch \
+	file://cinergy_s2_usb_r2.patch \
+	file://cxd2820r-output-full-range-SNR.patch \
+	file://dvb-usb-dib0700-disable-sleep.patch \
+	file://dvb_usb_disable_rc_polling.patch \	
+	file://it913x-switch-off-PID-filter-by-default.patch \
+	file://tda18271-advertise-supported-delsys.patch \
+	file://fix-dvb-siano-sms-order.patch \
+	file://mxl5007t-add-no_probe-and-no_reset-parameters.patch \
+	file://nfs-max-rwsize-8k.patch \
+	file://0001-rt2800usb-add-support-for-rt55xx.patch \	   
+	"
 
 SRC_URI_append_azboxhd += "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${KV}-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
 
