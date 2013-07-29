@@ -30,13 +30,14 @@ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${KV}.tar.bz2;name=azbox
 	file://cinergy_s2_usb_r2.patch \
 	file://cxd2820r-output-full-range-SNR.patch \
 	file://dvb-usb-dib0700-disable-sleep.patch \
-	file://dvb_usb_disable_rc_polling.patch \	
+	file://dvb_usb_disable_rc_polling.patch \
 	file://it913x-switch-off-PID-filter-by-default.patch \
 	file://tda18271-advertise-supported-delsys.patch \
 	file://fix-dvb-siano-sms-order.patch \
 	file://mxl5007t-add-no_probe-and-no_reset-parameters.patch \
 	file://nfs-max-rwsize-8k.patch \
-	file://0001-rt2800usb-add-support-for-rt55xx.patch \	   
+	file://0001-rt2800usb-add-support-for-rt55xx.patch \
+	file://0001-Revert-MIPS-Fix-potencial-corruption.patch \
 	"
 
 SRC_URI_append_azboxhd += "http://azbox-enigma2-project.googlecode.com/files/initramfs-${MACHINE}-oe-core-${KV}-${SRCDATE}.tar.bz2;name=azbox-initrd-${MACHINE}"
