@@ -10,18 +10,17 @@ diff -Naur a/data/keymap.xml b/data/keymap.xml
  
  	<map context="InfobarRedButtonActions">
 diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
---- a/lib/dvb/dvb.cpp	2013-06-29 15:08:51.828393000 +0430
-+++ b/lib/dvb/dvb.cpp	2013-06-29 15:10:33.208393843 +0430
-@@ -968,6 +968,8 @@
+--- a/lib/dvb/dvb.cpp	2013-07-31 16:13:49.000000000 +0430
++++ b/lib/dvb/dvb.cpp	2013-07-31 16:50:12.136318004 +0430
+@@ -968,6 +968,7 @@
  		iDVBAdapter *adapter = fe ? fe->m_adapter : m_adapter.begin(); /* look for a demux on the same adapter as the frontend, or the first adapter for dvr playback */
  		int source = fe ? fe->m_frontend->getDVBID() : -1;
  		cap |= capHoldDecodeReference; // this is checked in eDVBChannel::getDemux
 +		int n = 0;
-+
  		if (!fe)
  		{
  			/*
-@@ -985,8 +987,16 @@
+@@ -985,8 +986,16 @@
  			{
  				if (!i->m_inuse)
  				{
@@ -40,7 +39,7 @@ diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
  				}
  				else
  				{
-@@ -1000,7 +1010,7 @@
+@@ -1000,7 +1009,7 @@
  			}
  			if (fe)
  			{
@@ -50,9 +49,9 @@ diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
  			else
  			{
 diff -Naur a/lib/dvb/dvbtime.cpp b/lib/dvb/dvbtime.cpp
---- a/lib/dvb/dvbtime.cpp	2012-10-04 16:43:17.000000000 +0200
-+++ b/lib/dvb/dvbtime.cpp	2012-10-04 18:09:42.000000000 +0200
-@@ -268,6 +268,20 @@
+--- a/lib/dvb/dvbtime.cpp	2013-07-31 16:13:49.000000000 +0430
++++ b/lib/dvb/dvbtime.cpp	2013-07-31 16:51:29.780316528 +0430
+@@ -268,6 +268,19 @@
  {
  	int time_difference;
  	bool restart_tdt = false;
@@ -69,14 +68,13 @@ diff -Naur a/lib/dvb/dvbtime.cpp b/lib/dvb/dvbtime.cpp
 +		return;
 +	/* */
 +
-+
  	if (!tp_time)
  		restart_tdt = true;
  	else if (tp_time == -1)
 diff -Naur a/lib/python/Components/Harddisk.py b/lib/python/Components/Harddisk.py
---- a/lib/python/Components/Harddisk.py	2012-10-04 16:43:17.000000000 +0200
-+++ b/lib/python/Components/Harddisk.py	2012-10-04 17:18:03.000000000 +0200
-@@ -6,6 +6,7 @@
+--- a/lib/python/Components/Harddisk.py	2013-07-31 16:13:49.000000000 +0430
++++ b/lib/python/Components/Harddisk.py	2013-07-31 16:57:49.084309316 +0430
+@@ -4,6 +4,7 @@
  from SystemInfo import SystemInfo
  from Components.Console import Console
  import Task
@@ -84,7 +82,7 @@ diff -Naur a/lib/python/Components/Harddisk.py b/lib/python/Components/Harddisk.
  
  def readFile(filename):
  	file = open(filename)
-@@ -122,7 +123,11 @@
+@@ -115,7 +116,11 @@
  		elif self.type == DEVTYPE_DEVFS:
  			ide_cf = self.device[:2] == "hd" and "host0" not in self.dev_path
  
@@ -97,7 +95,7 @@ diff -Naur a/lib/python/Components/Harddisk.py b/lib/python/Components/Harddisk.
  
  		if ide_cf:
  			ret = "External (CF)"
-@@ -673,6 +678,9 @@
+@@ -685,6 +690,9 @@
  				physdev = dev
  				print "couldn't determine blockdev physdev for device", device
  		error, blacklisted, removable, is_cdrom, partitions, medium_found = self.getBlockDevInfo(device)
@@ -256,9 +254,9 @@ diff -Naur a/lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml b/lib/py
  self.condition = (self.port != "DVI" or self.mode == "PC")
  		</condition>		
 diff -Naur a/lib/python/Screens/InfoBarGenerics.py b/lib/python/Screens/InfoBarGenerics.py
---- a/lib/python/Screens/InfoBarGenerics.py	2012-11-29 14:34:43.000000000 +0100
-+++ b/lib/python/Screens/InfoBarGenerics.py	2012-11-30 19:38:26.000000000 +0100
-@@ -1918,6 +1918,7 @@
+--- a/lib/python/Screens/InfoBarGenerics.py	2013-07-31 16:13:49.000000000 +0430
++++ b/lib/python/Screens/InfoBarGenerics.py	2013-07-31 16:56:03.152311330 +0430
+@@ -2166,6 +2166,7 @@
  		self["SubserviceSelectionAction"] = HelpableActionMap(self, "InfobarSubserviceSelectionActions",
  			{
  				"subserviceSelection": (self.subserviceSelection, _("Subservice list...")),
@@ -266,7 +264,7 @@ diff -Naur a/lib/python/Screens/InfoBarGenerics.py b/lib/python/Screens/InfoBarG
  			})
  
  		self["SubserviceQuickzapAction"] = HelpableActionMap(self, "InfobarSubserviceQuickzapActions",
-@@ -1935,6 +1936,12 @@
+@@ -2183,6 +2184,12 @@
  
  		self.bsel = None
  
@@ -349,9 +347,9 @@ diff -Naur a/main/bsod.cpp b/main/bsod.cpp
  	if (bsodhandled) return;
  	bsodhandled = true;
 diff -Naur a/main/enigma.cpp b/main/enigma.cpp
---- a/main/enigma.cpp	2012-10-04 16:43:17.000000000 +0200
-+++ b/main/enigma.cpp	2012-10-05 16:02:45.000000000 +0200
-@@ -125,6 +125,36 @@
+--- a/main/enigma.cpp	2013-07-31 16:13:49.000000000 +0430
++++ b/main/enigma.cpp	2013-07-31 16:54:12.352313437 +0430
+@@ -127,6 +127,36 @@
  
  int main(int argc, char **argv)
  {
@@ -384,7 +382,7 @@ diff -Naur a/main/enigma.cpp b/main/enigma.cpp
 +
 +	}
 +	/* */
-+	
++
  #ifdef MEMLEAK_CHECK
  	atexit(DumpUnfreed);
  #endif
