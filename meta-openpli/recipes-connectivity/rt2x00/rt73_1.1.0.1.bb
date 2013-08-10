@@ -7,14 +7,12 @@ LIC_FILES_CHKSUM = "file://../../COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 RREPLACES_${PN} = "rt73-k2wrlz"
 RCONFLICTS_${PN} = "rt73-k2wrlz"
 
-MACHINE_KERNEL_PR_append = ".3"
-
 SRC_URI = "http://downloads.pli-images.org/misc/2008_0506_RT73_Linux_STA_Drv1.1.0.1.tar.bz2 \
            file://changeiface.patch \
            file://rt73-extra-devices.patch \
            file://COPYING"
 
-inherit module
+inherit module machine_kernel_pr
  
 S = "${WORKDIR}/2008_0506_RT73_Linux_STA_Drv1.1.0.1/Module/"
  

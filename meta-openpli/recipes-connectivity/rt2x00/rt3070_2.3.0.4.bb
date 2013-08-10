@@ -4,9 +4,7 @@ HOMEPAGE = "http://eng.ralinktech.com.tw/support.php?s=2"
 SECTION = "kernel/modules"
 #LICENSE = "GPLv2"
 
-MACHINE_KERNEL_PR_append = ".2"
-
-inherit module
+inherit module machine_kernel_pr
 
 # Original URL needs a click-wrap license.
 SRC_URI = "http://www.penguin.cz/~utx/hardware/Ralink_3071/DPO_RT3070_LinuxSTA_V${PV}_20100604.tar.bz2 \

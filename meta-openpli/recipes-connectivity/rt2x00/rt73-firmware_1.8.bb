@@ -1,7 +1,7 @@
 DESCRIPTION = "Firmware for rt73 based USB wifi adaptors"
 LICENSE = "unknown"
 
-PR = "r1"
+inherit module machine_kernel_pr
 
 SRC_URI = "http://www.ralinktech.com.tw/data/RT71W_Firmware_V${PV}.zip"
 

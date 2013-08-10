@@ -4,9 +4,6 @@ SECTION = "kernel/modules"
 LICENSE = "GPL"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-
-MACHINE_KERNEL_PR_append = ".5"
-
 SRC_URI = "http://archiv.openmips.com/rtl871x.tar.gz;name=rtl871x \
            file://mipsel-compatibility.patch \
            file://COPYING"
@@ -14,7 +11,7 @@ SRC_URI = "http://archiv.openmips.com/rtl871x.tar.gz;name=rtl871x \
 SRC_URI[rtl871x.md5sum] = "9da979c487f5c61a78111faa16450220"
 SRC_URI[rtl871x.sha256sum] = "5829d290dd60e5fb3de0f3eaa85b48de8b208ce8149b2f7d9b32c8ebc218ec82"
 
-inherit module
+inherit module machine_kernel_pr
 
 S = "${WORKDIR}/rtl871x"
 

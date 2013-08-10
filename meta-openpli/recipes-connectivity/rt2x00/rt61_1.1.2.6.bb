@@ -4,10 +4,7 @@ SECTION = "kernel/modules"
 LICENSE = "GPL"
 LIC_FILES_CHKSUM = "file://README;md5=d517aa8db7935eee411104c5be1b2ed9"
 
-inherit module
-
-PR = "r4"
-MACHINE_KERNEL_PR_append = ".2"
+inherit module machine_kernel_pr
 
 SRC_URI = "http://archiv.mixos-support.com/2010_0825_RT61_Linux_STA_v${PV}.tar.bz2 \
 	          file://makefile_rt61_1.1.2.6.patch \

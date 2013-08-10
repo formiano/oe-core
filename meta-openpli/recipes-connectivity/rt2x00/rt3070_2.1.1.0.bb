@@ -2,9 +2,7 @@ DESCRIPTION = "Ralink 3070"
 SECTION = "kernel/modules"
 LICENSE = "GPLv2"
 
-MACHINE_KERNEL_PR_append = ".2"
-
-inherit module
+inherit module machine_kernel_pr
 
 SRC_URI = "http://www.ralinktech.com.tw/data/drivers/2009_0525_RT3070_Linux_STA_v${PV}.tar.bz2 \
            file://makefile.patch \
