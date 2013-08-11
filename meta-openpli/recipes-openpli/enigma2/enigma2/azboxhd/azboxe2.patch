@@ -10,8 +10,8 @@ diff -Naur a/data/keymap.xml b/data/keymap.xml
  
  	<map context="InfobarRedButtonActions">
 diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
---- a/lib/dvb/dvb.cpp	2013-07-31 16:13:49.000000000 +0430
-+++ b/lib/dvb/dvb.cpp	2013-07-31 16:50:12.136318004 +0430
+--- a/lib/dvb/dvb.cpp	2013-08-09 02:01:48.000000000 +0430
++++ b/lib/dvb/dvb.cpp	2013-08-12 01:11:15.542864887 +0430
 @@ -968,6 +968,7 @@
  		iDVBAdapter *adapter = fe ? fe->m_adapter : m_adapter.begin(); /* look for a demux on the same adapter as the frontend, or the first adapter for dvr playback */
  		int source = fe ? fe->m_frontend->getDVBID() : -1;
@@ -39,11 +39,10 @@ diff -Naur a/lib/dvb/dvb.cpp b/lib/dvb/dvb.cpp
  				}
  				else
  				{
-@@ -1000,7 +1009,7 @@
- 			}
+@@ -1001,6 +1010,7 @@
  			if (fe)
  			{
--				++i;
+ 				++i;
 +				++n;
  			}
  			else
