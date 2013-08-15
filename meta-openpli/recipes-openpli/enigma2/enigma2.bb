@@ -163,12 +163,13 @@ PR = "${AZVERSION}.${AZREVISION}"
 ENIGMA2_BRANCH ?= "master"
 SRC_URI = "git://git.code.sf.net/p/openpli/enigma2;protocol=git;branch=${ENIGMA2_BRANCH}"
 SRC_URI += "\
+	file://azboxe2.patch \
 	file://e2_pcr.patch \
 	file://add_more_timeout.patch \
 "
 
 SRC_URI_append_azboxhd = " \
- file://azboxe2.patch \
+ file://azboxhd.patch \
  file://lcdchar.patch \
  file://rc.png \
  file://rcold.png \
@@ -180,7 +181,6 @@ SRC_URI_append_azboxhd = " \
 "
 
 SRC_URI_append_azboxme = " \
- file://azboxe2.patch \
  file://rc.png \
  file://rcold.png \
  file://rcpositions.xml \
@@ -191,7 +191,6 @@ SRC_URI_append_azboxme = " \
 "
 
 SRC_URI_append_azboxminime = " \
- file://azboxe2.patch \
  file://rc.png \
  file://rcold.png \
  file://rcpositions.xml \

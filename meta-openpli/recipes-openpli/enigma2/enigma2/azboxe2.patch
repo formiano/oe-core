@@ -350,3 +350,24 @@ diff -Naur a/main/enigma.cpp b/main/enigma.cpp
  #ifdef MEMLEAK_CHECK
  	atexit(DumpUnfreed);
  #endif
+diff -Naur a/lib/dvb/frontend.cpp b/lib/dvb/frontend.cpp
+--- a/lib/dvb/frontend.cpp	2013-08-14 23:03:52.883760000 +0430
++++ b/lib/dvb/frontend.cpp	2013-08-15 19:37:40.843057493 +0430
+@@ -1,3 +1,4 @@
++#include <linux/version.h>
+ #include <linux/dvb/version.h>
+ 
+ #include <lib/dvb/dvb.h>
+@@ -1861,8 +1862,12 @@
+ 			if (system == SYS_DVBT2)
+ 			{
+ #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 3
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,0))
++				p[cmdseq.num].cmd = DTV_DVBT2_PLP_ID_LEGACY, p[cmdseq.num].u.data = parm.plpid, cmdseq.num++;
++#else
+ 				p[cmdseq.num].cmd = DTV_DVBT2_PLP_ID, p[cmdseq.num].u.data = parm.plpid, cmdseq.num++;
+ #endif
++#endif
+ 			}
+ 		}
+ 		else if (type == iDVBFrontend::feATSC)
