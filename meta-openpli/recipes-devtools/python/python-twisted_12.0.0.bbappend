@@ -1,4 +1,4 @@
-PRINC = "1"
+PRINC = "2"
 
 inherit setuptools openpli-distutils
 
@@ -12,4 +12,6 @@ FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*/*/*.py \
 	"

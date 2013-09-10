@@ -1,4 +1,4 @@
-PRINC = "2"
+PRINC = "3"
 
 RDEPENDS_${PN} += "libusb1"
 
@@ -15,4 +15,5 @@ FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*/*.py \
 	"

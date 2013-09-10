@@ -1,16 +1,13 @@
-PRINC = "8"
+PRINC = "1"
 
-inherit setuptools openpli-distutils
+inherit openpli-distutils
 
 do_install() {
 	distutils_do_install_keep_pyo
 }
 
-PACKAGES =+ " ${PN}-src ${PN}-tests"
+PACKAGES =+ " ${PN}-src"
 RDEPENDS_{PN}-src = "${PN}"
-FILES_${PN}-tests = " \
-	${libdir}/${PYTHON_DIR}/site-packages/*/Tests \
-	"
 FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
@@ -18,3 +15,4 @@ FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*/*.py \
 	"
+

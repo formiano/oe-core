@@ -1,4 +1,4 @@
-PRINC = "2"
+PRINC = "3"
 
 inherit setuptools openpli-distutils
 
@@ -16,4 +16,5 @@ FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*/*.py \
 	"

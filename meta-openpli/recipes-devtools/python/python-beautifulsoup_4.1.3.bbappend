@@ -1,4 +1,4 @@
-PRINC = "4"
+PRINC = "5"
 
 inherit openpli-distutils
 
@@ -13,4 +13,5 @@ FILES_${PN}-src = " \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*.py \
 	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/*/*/*/*/*/*.py \
 	"
