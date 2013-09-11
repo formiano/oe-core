@@ -7,12 +7,11 @@ require conf/license/openpli-gplv2.inc
 
 inherit gitpkgv
 
-PV = "experimental-git${SRCPV}"
-PKGV = "experimental-git${GITPKGV}"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
 PR = "${AZVERSION}.${AZREVISION}"
-BRANCH = "master"
 
-SRC_URI = "git://schwerkraft.elitedvb.net/enigma2-skins/enigma2-skins.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/OpenE2/enigma2-skins.git;protocol=git"
 
 # note that enigma2-skins is just an empty package to satisfy silly dependencies.
 ALLOW_EMPTY_${PN} = "1"
