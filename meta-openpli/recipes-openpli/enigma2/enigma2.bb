@@ -166,6 +166,7 @@ SRC_URI += "\
 	file://azboxe2.patch \
 	file://e2_pcr.patch \
 	file://add_more_timeout.patch \
+	file://pic_show.patch \
 "
 
 SRC_URI_append_azboxhd = " \
