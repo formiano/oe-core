@@ -1,9 +1,9 @@
-DESCRIPTION = "Hardware user space LIBs for ${MACHINE}"
+SUMMARY = "Hardware user space LIBs for ${MACHINE}"
 SECTION = "libs"
 PRIORITY = "required"
 LICENSE = "CLOSED"
 
-PR = "${AZREVISION}"
+PR = "r5"
 
 SRCDATE = "3.11-1"
 SRCDATE_azboxhd = "2.8-3"
